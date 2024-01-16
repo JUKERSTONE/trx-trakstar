@@ -1,0 +1,6 @@
+module react_native_apple_music {
+  umbrella header "react-native-apple-music-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -1,0 +1,6 @@
+module Pods_trxklist_trxklistTests {
+  umbrella header "Pods-trxklist-trxklistTests-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -1,0 +1,125 @@
+import {StyleSheet} from 'react-native';
+import {scale} from '../../8.core/scaling';
+
+const styles = StyleSheet.create({
+  post: {
+    // height: scale('450px'),
+    backgroundColor: 'transparent',
+    borderBottomWidth: 0.8,
+    borderBottomColor: '#fff',
+  },
+  header: {
+    backgroundColor: '#fff',
+    // opacity: 0.9,
+    minHeight: 40,
+    flexDirection: 'row',
+    borderWidth: 3,
+    borderColor: '#fff',
+    // borderBottomLeftRadius: 20,
+    // borderBottomRightRadius: 20,
+    borderRadius: 15,
+    padding: 10,
+    marginBottom: 15,
+    // opacity: 0.7,
+  },
+  imgContainer: {
+    flex: 1,
+    opacity: 0.9,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  profilePicture: {
+    height: 65,
+    width: 80,
+    borderRadius: 10,
+    flexDirection: 'column',
+    // borderWidth: 2,
+    // backgroundColor: '#cecece',
+    borderColor: 'grey',
+  },
+  profilePictureBorder: {
+    // borderWidth: 2,
+    // borderColor: 'grey',
+    // borderRadius: 15,
+  },
+  titles: {
+    flex: 5,
+    // backgroundColor: 'black',
+    opacity: 0.9,
+    alignItems: 'flex-end',
+    justifyContent: 'space-around',
+    padding: 10,
+  },
+  user: {
+    color: '#fff',
+  },
+  caption: {
+    color: '#fff',
+    fontWeight: 'bold',
+  },
+  music: {
+    alignItems: 'flex-end',
+    justifyContent: 'center',
+    // backgroundColor: 'green',
+    flex: 3,
+  },
+  artwork: {
+    height: 300,
+    width: 300,
+    flexDirection: 'column',
+    // backgroundColor: '#cecece',
+    // borderRadius: 15,
+  },
+  musicInfo: {
+    flex: 1,
+    justifyContent: 'flex-end',
+  },
+  songTexts: {
+    backgroundColor: 'black',
+    opacity: 0.75,
+    paddingTop: 8,
+    paddingLeft: 20,
+    alignItems: 'flex-start',
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10,
+  },
+  title: {
+    textAlign: 'center',
+    color: '#fff',
+  },
+  artist: {
+    textAlign: 'center',
+    color: '#fff',
+    fontWeight: 'bold',
+  },
+  previewContainer: {
+    height: 45,
+    backgroundColor: 'black',
+    opacity: 0.75,
+    borderBottomLeftRadius: 10,
+    borderBottomRightRadius: 10,
+  },
+  preview: {
+    flex: 1,
+    opacity: 0.9,
+    backgroundColor: 'black',
+    borderBottomLeftRadius: 10,
+    borderBottomRightRadius: 10,
+  },
+  footer: {
+    backgroundColor: '#fff',
+    marginVertical: 15,
+    // opacity: 0.75,
+    flex: 0.55,
+    padding: 10,
+    borderRadius: 10,
+    flexDirection: 'row',
+    alignItems: 'flex-end',
+    alignSelf: 'flex-end',
+    justifyContent: 'space-between',
+    paddingLeft: 5,
+    width: '90%',
+  },
+});
+
+export default styles;

@@ -1,0 +1,31 @@
+{
+  "name": "react-native-apple-music",
+  "version": "1.0.3",
+  "summary": "A react native module for the Apple Music API",
+  "description": "react-native-apple-music",
+  "homepage": "https://github.com/Lemonadd-UG/react-native-apple-music",
+  "license": "MIT",
+  "authors": {
+    "Your Name": "yourname@email.com"
+  },
+  "platforms": {
+    "ios": "11.0"
+  },
+  "source": {
+    "git": "https://github.com/Lemonadd-UG/react-native-apple-music.git",
+    "tag": "1.0.3"
+  },
+  "source_files": "ios/**/*.{h,m,swift}",
+  "requires_arc": true,
+  "dependencies": {
+    "React": [
+
+    ],
+    "SwiftJWT": [
+
+    ],
+    "PromiseKit": [
+      "~> 6.8"
+    ]
+  }
+}

@@ -1,0 +1,6 @@
+module Pods_trxklist {
+  umbrella header "Pods-trxklist-umbrella.h"
+
+  export *
+  module * { export * }
+}
