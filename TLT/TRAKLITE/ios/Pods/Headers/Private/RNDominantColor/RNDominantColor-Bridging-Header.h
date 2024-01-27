@@ -1,1 +1,0 @@
-../../../../../node_modules/rn-dominant-color/ios/RNDominantColor/Support/RNDominantColor-Bridging-Header.h

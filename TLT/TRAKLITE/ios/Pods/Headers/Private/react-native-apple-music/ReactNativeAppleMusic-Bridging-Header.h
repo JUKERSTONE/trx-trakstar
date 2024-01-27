@@ -1,1 +1,0 @@
-../../../../../node_modules/@bouncyapp/react-native-apple-music/ios/ReactNativeAppleMusic-Bridging-Header.h
