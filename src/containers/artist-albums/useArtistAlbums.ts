@@ -103,13 +103,17 @@ export const useArtistAlbums = ({navigation, route}: any) => {
       '🚀 ~ file: useArtistAlbums.ts:103 ~ handleTapeNavigation ~ response:',
       response,
     );
-    navigation.navigate('MODAL', {
-      type: 'tape',
-      exchange: {
-        active: true,
-        item: response.data,
-      },
-    });
+    // navigation.navigate('MODAL', {
+    //   type: 'tape',
+    //   exchange: {
+    //     active: true,
+    //     item: response.data,
+    //   },
+    // });
+
+    alert(
+      'This feature is coming soon! For now search for albums in the discover screen',
+    );
   };
 
   return {

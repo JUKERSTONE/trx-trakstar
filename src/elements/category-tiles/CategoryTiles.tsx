@@ -5,6 +5,7 @@ import {
   useWindowDimensions,
   FlatList,
   Image,
+  Button,
 } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -15,6 +16,7 @@ import FastImage from 'react-native-fast-image';
 export const CategoryTilesElement = ({
   categories,
   handleNavigateExplorer,
+  handleLoadShop,
 }: any) => {
   return (
     <View style={{padding: 10}}>

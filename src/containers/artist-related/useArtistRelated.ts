@@ -33,7 +33,7 @@ export const useArtistRelated = ({navigation, route}: any) => {
   const keys = handleGetState({index: 'keys'});
 
   const spotify = keys.spotify;
-  const accessToken = spotify.accessToken;
+  const appToken = spotify.appToken;
 
   // const profile = handleGetState({index: 'profile'});
   // const TRXProfile = profile.TRX;
@@ -108,25 +108,25 @@ export const useArtistRelated = ({navigation, route}: any) => {
         axios.get(SPOTIFY_GET_ARTIST(artist.id), {
           headers: {
             'Content-Type': 'application/json',
-            Authorization: 'Bearer ' + accessToken,
+            Authorization: 'Bearer ' + appToken,
           },
         }),
         axios.get(SPOTIFY_GET_ARTIST_TOP_TRACKS(artist.id), {
           headers: {
             'Content-Type': 'application/json',
-            Authorization: 'Bearer ' + accessToken,
+            Authorization: 'Bearer ' + appToken,
           },
         }),
         axios.get(SPOTIFY_GET_ARTIST_ALBUMS(artist.id), {
           headers: {
             'Content-Type': 'application/json',
-            Authorization: 'Bearer ' + accessToken,
+            Authorization: 'Bearer ' + appToken,
           },
         }),
         axios.get(SPOTIFY_GET_ARTIST_RELATED_ARTISTS(artist.id), {
           headers: {
             'Content-Type': 'application/json',
-            Authorization: 'Bearer ' + accessToken,
+            Authorization: 'Bearer ' + appToken,
           },
         }),
       ])
@@ -160,7 +160,7 @@ export const useArtistRelated = ({navigation, route}: any) => {
 
           setTimeout(() => {
             // setLoadingArtist(false);
-            navigation.navigate('MODAL', {
+            navigation.push('MODAL', {
               type: 'artist-view',
               exchange: {
                 active: true,

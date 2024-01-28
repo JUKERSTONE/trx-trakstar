@@ -86,7 +86,7 @@ export const DiscoverComponent = ({isSearching, query, ...props}: any) => {
           // swipeEnabled={false}
           navigationState={{index, routes}}
           style={{
-            height: Dimensions.get('screen').height,
+            height: Dimensions.get('screen').height * 3,
           }}
           renderScene={({route}) => {
             switch (route.key) {

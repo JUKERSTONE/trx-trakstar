@@ -448,7 +448,7 @@ export const TRAKLISTradioElement = (...props) => {
           }}>
           <View
             style={{
-              height: 170,
+              height: 70,
               width: '100%',
               backgroundColor: '#fff',
               alignItems: 'center',

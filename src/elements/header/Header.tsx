@@ -57,7 +57,6 @@ export const HeaderElement = ({
   hasChat,
   handleAdmin,
   handleNavigateConnect,
-  isOnboarding,
 }: any) => {
   const player = useSelector((state: any) => state.player);
   const profile = useSelector((state: any) => state.profile);
@@ -192,7 +191,7 @@ export const HeaderElement = ({
                   />
                 </View>
               </TouchableOpacity>
-            ) : isOnboarding ? (
+            ) : !isLoggedIn ? (
               <TouchableOpacity onPress={() => handleAuthentication(isModal)}>
                 <View
                   style={{

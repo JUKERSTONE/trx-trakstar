@@ -30,18 +30,18 @@ export const useCategoryTiles = ({navigation, route}: any) => {
       };
     }, []),
   );
-  // useEffectAsync(async () => {
-  //   const categories = await handleGetCategories();
-  //   console.log(
-  //     '🚀 ~ file: useCategoryTiles.ts:13 ~ useEffectAsync ~ categories:',
-  //     categories,
-  //   );
-  //   setCategories(categories);
+  useEffectAsync(async () => {
+    const categories = await handleGetCategories();
+    console.log(
+      '🚀 ~ file: useCategoryTiles.ts:13 ~ useEffectAsync ~ categories:',
+      categories,
+    );
+    setCategories(categories);
 
-  //   setTimeout(() => {
-  //     navigation.navigate('Explorer', {categories, selectedCategoryIndex: 1});
-  //   }, 500);
-  // }, []);
+    // setTimeout(() => {
+    //   navigation.navigate('Explorer', {categories, selectedCategoryIndex: 1});
+    // }, 500);
+  }, []);
 
   const handleNavigateExplorer = ({selectedCategoryIndex}: any) => {
     navigation.navigate('Explorer', {categories, selectedCategoryIndex});

@@ -46,7 +46,6 @@ export const ListsStack = () => {
             <HeaderContainer
               backgroundColor="#1a1a1a"
               hasBasket={isStorefront}
-              isOnboarding
               hasShazam={!isStorefront}
               {...props}
               hasTRAKLIST
