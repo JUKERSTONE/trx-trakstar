@@ -1,11 +1,7 @@
 name: iOS binary build & upload
 
 on:
-  push:
-    branches:
-      - main # Replace with your target branch, if different
-    paths:
-      - "TLT/LiteList/**"
+  workflow_dispatch:
 
 jobs:
   deploy:
