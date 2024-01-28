@@ -448,7 +448,7 @@ export const TRAKLISTradioElement = (...props) => {
           }}>
           <View
             style={{
-              height: 70,
+              height: 170,
               width: '100%',
               backgroundColor: '#fff',
               alignItems: 'center',
@@ -507,55 +507,57 @@ export const TRAKLISTradioElement = (...props) => {
                   if (youtubeId) {
                     // if next branch doesn't exist, create it
                     if (traklistIndex === traklist.length - 1) {
-                      const traklist = await Promise.all(
-                        radio.default.value.map(async (isrc: string) => {
-                          return await handleGetTRX00({
-                            trakURI: `trx:00:${isrc}`,
-                          });
-                        }),
-                      );
-
-                      const playerService = traklist.map((item: any) => {
-                        const trak = JSON.parse(item.serialized_trak).TRAK;
-                        console.log(
-                          '🚀 ~ file: radio.ts:27 ~ trx ~ trak:',
-                          trak,
+                      if (radio.default) {
+                        const traklist = await Promise.all(
+                          radio.default.value.map(async (isrc: string) => {
+                            return await handleGetTRX00({
+                              trakURI: `trx:00:${isrc}`,
+                            });
+                          }),
                         );
-                        return {
-                          player: {
-                            title: trak.trak.title,
-                            artist: trak.trak.artist,
-                            cover_art: trak.trak.thumbnail,
-                            geniusId: trak.trak.genius.id,
-                          },
-                          service: {
-                            provider: 'youtube',
-                            url: trak.trak.youtube.url,
-                          },
-                          id: item.id,
-                        };
-                      });
 
-                      const action1 = handleMediaPlayerAction({
-                        playbackState: 'pause:force',
-                      });
+                        const playerService = traklist.map((item: any) => {
+                          const trak = JSON.parse(item.serialized_trak).TRAK;
+                          console.log(
+                            '🚀 ~ file: radio.ts:27 ~ trx ~ trak:',
+                            trak,
+                          );
+                          return {
+                            player: {
+                              title: trak.trak.title,
+                              artist: trak.trak.artist,
+                              cover_art: trak.trak.thumbnail,
+                              geniusId: trak.trak.genius.id,
+                            },
+                            service: {
+                              provider: 'youtube',
+                              url: trak.trak.youtube.url,
+                            },
+                            id: item.id,
+                          };
+                        });
 
-                      store.dispatch(action1);
-                      const action = appendTraklist({
-                        traklist: playerService,
-                        radio: radio.default,
-                      });
+                        const action1 = handleMediaPlayerAction({
+                          playbackState: 'pause:force',
+                        });
 
-                      store.dispatch(action);
-
-                      await handleStore({
-                        key: asyncStorageIndex.radio,
-                        value: {
-                          trx: radio.default,
+                        store.dispatch(action1);
+                        const action = appendTraklist({
                           traklist: playerService,
-                          index: 0,
-                        },
-                      });
+                          radio: radio.default,
+                        });
+
+                        store.dispatch(action);
+
+                        await handleStore({
+                          key: asyncStorageIndex.radio,
+                          value: {
+                            trx: radio.default,
+                            traklist: playerService,
+                            index: 0,
+                          },
+                        });
+                      }
                     } else {
                       await handleStore({
                         key: asyncStorageIndex.radio,

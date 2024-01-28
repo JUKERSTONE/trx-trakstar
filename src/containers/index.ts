@@ -75,3 +75,4 @@ export * from './trx-m3dia';
 export * from './spotify-refresh';
 export * from './playlist';
 export * from './auction';
+export * from './admin';

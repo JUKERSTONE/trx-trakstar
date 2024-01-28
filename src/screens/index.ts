@@ -14,3 +14,4 @@ export * from './Connect';
 export * from './WalletSetup';
 export * from './BeReal';
 export * from './Auction';
+export * from './Admin';

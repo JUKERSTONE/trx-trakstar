@@ -18,7 +18,7 @@ import {
   PlaylistContainer,
   PlaylistViewContainer,
 } from '../../../../containers';
-import {MainTabStack, BeRealStack} from '../../../../stacks';
+import {MainTabStack, BeRealStack, AdminStack} from '../../../../stacks';
 import {MessagingInterface, ChatInterface} from '../../../../interfaces';
 import {PlayerContext} from '../../../../stores';
 import {useLITELISTState} from '../../../useLITELISTState';
@@ -88,6 +88,14 @@ export const INTEFACE_ = React.memo(({...props}: any) => {
             component={BeRealStack} //add user to state
             options={{
               title: 'BE_REAL',
+              header: () => null,
+            }}
+          />
+          <Stack.Screen
+            name="ADMIN"
+            component={AdminStack} //add user to state
+            options={{
+              title: 'Admin',
               header: () => null,
             }}
           />

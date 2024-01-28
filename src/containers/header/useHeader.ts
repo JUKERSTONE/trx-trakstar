@@ -71,7 +71,6 @@ export const useHeader = ({navigation}: any) => {
 
   const handleAuthentication = (isModal: any, type: string) => {
     // remove state when logging out
-
     switch (isLoggedIn) {
       case true:
         Alert.alert(
@@ -121,7 +120,8 @@ export const useHeader = ({navigation}: any) => {
         );
 
       default:
-        navigation.navigate('AUTHENTICATION');
+        navigation.navigate('SIGN_IN');
+        return;
     }
   };
 
@@ -509,6 +509,10 @@ export const useHeader = ({navigation}: any) => {
     navigation.navigate('REGISTER');
   };
 
+  const handleAdmin = () => {
+    navigation.navigate('ADMIN');
+  };
+
   return {
     handleDeposit,
     handleGoBack,
@@ -528,6 +532,7 @@ export const useHeader = ({navigation}: any) => {
     handleShazam,
     handleClearCache,
     handleNavigateConnect,
+    handleAdmin,
     profile,
   };
 };

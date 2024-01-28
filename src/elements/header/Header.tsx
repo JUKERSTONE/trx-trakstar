@@ -55,8 +55,9 @@ export const HeaderElement = ({
   handleShazam,
   handleClearCache,
   hasChat,
-
+  handleAdmin,
   handleNavigateConnect,
+  isOnboarding,
 }: any) => {
   const player = useSelector((state: any) => state.player);
   const profile = useSelector((state: any) => state.profile);
@@ -191,6 +192,38 @@ export const HeaderElement = ({
                   />
                 </View>
               </TouchableOpacity>
+            ) : isOnboarding ? (
+              <TouchableOpacity onPress={() => handleAuthentication(isModal)}>
+                <View
+                  style={{
+                    flexDirection: 'row',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                  }}>
+                  <VHeader
+                    type="six"
+                    color={isLoggedIn ? '#fff' : '#fff'}
+                    text={isLoggedIn ? 'SIGN OUT' : 'SIGN IN'}
+                  />
+                  <View
+                    style={{
+                      height: 35,
+                      width: 35,
+                      // borderWidth: 2.5,
+                      borderColor: '#fff',
+                      borderRadius: 20,
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                    }}>
+                    <FontAwesome
+                      name={isLoggedIn ? 'sign-out' : 'sign-in'}
+                      size={23}
+                      color={isLoggedIn ? '#FFF' : '#fff'}
+                      style={{opacity: 0.9, paddingTop: 0}}
+                    />
+                  </View>
+                </View>
+              </TouchableOpacity>
             ) : (
               <TouchableOpacity
                 onPress={handleShazam}
@@ -224,38 +257,67 @@ export const HeaderElement = ({
           <TouchableOpacity
             style={{flex: 1}}
             onPress={() =>
-              isLoggedIn &&
-              Alert.alert(`Menu`, `What would you like to do?`, [
-                {
-                  text: 'Cancel',
-                  onPress: () => console.log('Cancel Pressed'),
-                  style: 'cancel',
-                },
-                {
-                  text: 'Chat',
-                  onPress: handleProfile,
-                },
-                {
-                  text: 'Shop',
-                  onPress: handleNavigateShop,
-                },
-                {
-                  text: 'Upgrade',
-                  onPress: handleNavigatePaywall,
-                },
-                {
-                  text: 'Clear Cache',
-                  onPress: handleClearCache,
-                },
-                {
-                  text: 'Sign Out',
-                  onPress: async () => handleAuthentication(isModal),
-                },
-                {
-                  text: 'Delete Account',
-                  onPress: async () => handleAuthentication(isModal, 'delete'),
-                },
-              ])
+              !isLoggedIn
+                ? Alert.alert(`Menu`, `What would you like to do?`, [
+                    {
+                      text: 'Cancel',
+                      onPress: () => console.log('Cancel Pressed'),
+                      style: 'cancel',
+                    },
+
+                    {
+                      text: 'Shop',
+                      onPress: handleNavigateShop,
+                    },
+                    {
+                      text: 'Upgrade',
+                      onPress: handleNavigatePaywall,
+                    },
+                    {
+                      text: 'Admin',
+                      onPress: handleAdmin,
+                    },
+                    {
+                      text: 'Clear Cache',
+                      onPress: handleClearCache,
+                    },
+                  ])
+                : Alert.alert(`Menu`, `What would you like to do?`, [
+                    {
+                      text: 'Cancel',
+                      onPress: () => console.log('Cancel Pressed'),
+                      style: 'cancel',
+                    },
+                    {
+                      text: 'Chat',
+                      onPress: handleProfile,
+                    },
+                    {
+                      text: 'Shop',
+                      onPress: handleNavigateShop,
+                    },
+                    {
+                      text: 'Upgrade',
+                      onPress: handleNavigatePaywall,
+                    },
+                    {
+                      text: 'Admin',
+                      onPress: handleAdmin,
+                    },
+                    {
+                      text: 'Clear Cache',
+                      onPress: handleClearCache,
+                    },
+                    {
+                      text: 'Sign Out',
+                      onPress: async () => handleAuthentication(isModal),
+                    },
+                    {
+                      text: 'Delete Account',
+                      onPress: async () =>
+                        handleAuthentication(isModal, 'delete'),
+                    },
+                  ])
             }>
             <Image
               source={{

@@ -4,6 +4,9 @@ import Toast from 'react-native-toast-message';
 import {Alert} from 'react-native';
 import RNFetchBlob from 'rn-fetch-blob';
 import {action} from 'mobx';
+import {asyncStorageIndex, useAsyncStorage} from '../../async';
+
+const {handleClear, handleRemove, handleStore} = useAsyncStorage();
 
 export const playerSlice = createSlice({
   name: 'player',
@@ -70,7 +73,31 @@ export const playerSlice = createSlice({
         const trak = state.traklist[state.traklistIndex];
         console.log('🚀 ~ file: player.ts:53 ~ trak:', trak);
 
-        if (!trak) return;
+        if (!trak) {
+          state.youtubeId = null;
+          state.traklist = null;
+          state.paused = false;
+
+          const nextIndex = state.index + 1;
+          console.log('🚀 ~ file: player.ts ~ line 90 ~ newIndex', nextIndex);
+          const nextTrak = state.queue[nextIndex];
+          state.source = {uri: nextTrak.web.spotify.preview};
+          state.image = {uri: nextTrak.cover_art};
+          state.artist = nextTrak.artist;
+          state.title = nextTrak.title;
+          state.id = nextTrak.web.spotify.id;
+          state.index = nextIndex;
+          state.service = 'traklist';
+          state.device = null;
+          state.isrc = nextTrak.isrc;
+
+          Promise.resolve(
+            handleRemove({
+              key: asyncStorageIndex.radio,
+            }),
+          );
+          return;
+        }
 
         switch (trak.service.provider) {
           case 'youtube':

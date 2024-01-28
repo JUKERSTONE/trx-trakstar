@@ -24,7 +24,7 @@ export const handleGetTRXRadio = async () => {
   });
   console.log(
     '🚀 ~ file: radio.ts:25 ~ handleGetTRXRadio ~ seriliazedRadio:',
-    seriliazedRadio,
+    typeof seriliazedRadio,
   );
 
   if (seriliazedRadio) {

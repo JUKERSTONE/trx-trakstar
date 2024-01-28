@@ -18,7 +18,7 @@ import {
   DiscoverContainer,
 } from '../../containers';
 import {CheckoutInterface} from '../../interfaces';
-import {StorefrontScreen} from '../../screens';
+import {SignInScreen, StorefrontScreen} from '../../screens';
 import {AIMusicContainer} from '../../containers/ai-music';
 import {PlayerContext} from '../../stores';
 import {RegisterStack} from '../authenticate/internal';
@@ -46,12 +46,22 @@ export const ListsStack = () => {
             <HeaderContainer
               backgroundColor="#1a1a1a"
               hasBasket={isStorefront}
+              isOnboarding
               hasShazam={!isStorefront}
               {...props}
               hasTRAKLIST
             />
           ),
           // title: 'LISTS',
+        }}
+      />
+
+      <Stack.Screen
+        name="SIGN_IN"
+        component={SignInScreen}
+        options={{
+          title: 'SIGN IN',
+          header: props => <HeaderContainer hasBackButton {...props} />,
         }}
       />
       <Stack.Screen

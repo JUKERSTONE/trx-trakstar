@@ -8,3 +8,4 @@ export * from './main';
 export * from './be-real';
 export * from './chat';
 export * from './shop';
+export * from './admin';

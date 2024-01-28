@@ -34,7 +34,7 @@ import firestore from '@react-native-firebase/firestore';
 import {PlayerContext} from '../../stores';
 
 const {handleGetState} = useLITELISTState();
-const {handleClear, handleStore} = useAsyncStorage();
+const {handleClear, handleRemove, handleStore} = useAsyncStorage();
 
 const keys = handleGetState({index: 'keys'});
 const accessToken = keys.spotify.accessToken;
@@ -77,28 +77,158 @@ export const useTRX = (props?: any) => {
     artist,
     cover_art,
     geniusId,
+    youtubeId,
   }: {
     uri: string;
     title: string;
     artist: string;
     cover_art: string;
     geniusId: string;
+    youtubeId: string;
   }) => {
+    console.log('🚀 ~ useTRX ~ youtubeId:', youtubeId);
     const trxRadio = radio;
 
     console.log('🚀 ~ useTRX ~ trxRadio:', trxRadio);
     console.log('🚀 ~ useTRX ~ traklistIndex:', traklistIndex);
+    console.log('🚀 ~ useTRX ~ efefeetraklistIndex:', trxRadio.default?.value);
+
+    const {handleGetState} = useLITELISTState();
+    const profile = handleGetState({index: 'profile'});
+    const TRXProfile = profile.TRX;
+    const userId = TRXProfile.id;
+
     // if next branch doesn't exist, create it
+
     if (traklistIndex === traklist.length - 1) {
+      if (!trxRadio.default) {
+        await handleRemove({
+          key: asyncStorageIndex.radio,
+        });
+
+        const sessionId = uuid.v4();
+
+        const session = {
+          id: sessionId,
+          userId,
+          uri,
+          title,
+          artist,
+          cover_art,
+          geniusId,
+          streamingAt: new Date().toString(),
+        };
+
+        const streamDoc = await firestore()
+          .doc('fundamentals/TRAKSTAR/streaming/' + uri)
+          .get()
+          .then(async doc => {
+            const data = doc.data();
+            console.log('🚀 ~ file: stream.ts:39 ~ handleStream ~ data:', data);
+            if (doc.exists) {
+              await firestore()
+                .doc('fundamentals/TRAKSTAR/streaming/' + uri)
+                .update({
+                  count: data?.count + 1,
+                  artist,
+                  cover_art,
+                  geniusId,
+                  title,
+                  uri,
+                });
+            } else {
+              await firestore()
+                .doc('fundamentals/TRAKSTAR/streaming/' + uri)
+                .set({
+                  count: 1,
+                  artist,
+                  cover_art,
+                  geniusId,
+                  title,
+                  uri,
+                })
+                .catch(err => {
+                  alert('stream err');
+                  console.log(
+                    '🚀 ~ file: stream.ts:52 ~ handleStream ~ err:',
+                    err,
+                  );
+                });
+            }
+
+            console.log(
+              '🚀 ~ file: getTrending.ts:29 ~ .then ~ data:',
+              doc.data(),
+            );
+          })
+          .then(async () => {
+            //
+            // update user playback
+            const userPlaybackRef = firestore().doc(
+              `users/${userId}/playback/` + uri,
+            );
+
+            await firestore()
+              .doc(`sessions/${sessionId}`)
+              .set(session)
+              .then(() => {
+                userPlaybackRef.get().then(doc => {
+                  if (doc.exists) {
+                    const data = doc.data();
+                    userPlaybackRef.update({
+                      count: data?.count + 1,
+                      artist,
+                      cover_art,
+                      geniusId,
+                      title,
+                      uri,
+                    });
+                  } else {
+                    userPlaybackRef.set({
+                      count: 1,
+                      artist,
+                      cover_art,
+                      geniusId,
+                      title,
+                      uri,
+                    });
+                  }
+
+                  Toast.show({
+                    type: 'info',
+                    text1: "That's called a stream!",
+                    text2: `Thank you for using TrakStar™ - Free music, no ads`,
+                  });
+                });
+              });
+          })
+          .catch(err => {
+            // alert('err stream 1');
+            console.log('🚀 ~ file: stream.ts:70 ~ .then ~ err:', err);
+          });
+
+        console.log(
+          '🚀 ~ file: stream.ts:24 ~ handleStream ~ streamDoc:',
+          streamDoc,
+        );
+      }
+
       const traklist = await Promise.all(
-        trxRadio.default.value.map(async (isrc: string) => {
+        trxRadio.default?.value.map(async (isrc: string) => {
           return await handleGetTRX00({trakURI: `trx:00:${isrc}`});
         }),
       );
+      console.log('🚀 ~ useTRX ~ traklist:', traklist);
 
       const playerService = traklist.map((item: any) => {
+        console.log('🚀 ~ playerService ~ item:', item);
         const trak = JSON.parse(item.serialized_trak).TRAK;
         console.log('🚀 ~ file: radio.ts:27 ~ trx ~ trak:', trak);
+        console.log(
+          '🚀 ~ playerService ~ trak.trak.youtube.url:',
+          trak.trak.youtube?.url ?? youtubeId,
+        );
+
         return {
           player: {
             title: trak.trak.title,
@@ -106,21 +236,24 @@ export const useTRX = (props?: any) => {
             cover_art: trak.trak.thumbnail,
             geniusId: trak.trak.genius.id,
           },
-          service: {provider: 'youtube', url: trak.trak.youtube.url},
+          service: {
+            provider: 'youtube',
+            url: trak.trak.youtube.url ?? youtubeId ?? null,
+          },
           id: item.id,
         };
       });
+      console.log('🚀 ~ playerService ~ playerService:', playerService);
 
       const action1 = handleMediaPlayerAction({
         playbackState: 'pause:force',
       });
-
       store.dispatch(action1);
+
       const action = appendTraklist({
         traklist: playerService,
         radio: trxRadio.default,
       });
-
       store.dispatch(action);
 
       await handleStore({
@@ -141,12 +274,8 @@ export const useTRX = (props?: any) => {
         },
       });
     }
-
     console.log('🚀 ~ file: stream.ts:15 ~ handleStream ~ uri:', uri);
-    const {handleGetState} = useLITELISTState();
-    const profile = handleGetState({index: 'profile'});
-    const TRXProfile = profile.TRX;
-    const userId = TRXProfile.id;
+
     console.log(
       '🚀 ~ file: retrieveStory.ts ~ line 18 ~ handleRetrieveStory ~ userId',
       userId,
