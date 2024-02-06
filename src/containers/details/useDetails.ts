@@ -4,6 +4,7 @@ import storage from '@react-native-firebase/storage';
 import uuid from 'react-native-uuid';
 import {useFirebase, useLITELISTState} from '../../app';
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
+import auth from '@react-native-firebase/auth';
 
 export const useDetails = ({navigation, route}: any) => {
   const [details, setDetails] = useState<any>({
@@ -13,17 +14,22 @@ export const useDetails = ({navigation, route}: any) => {
     email_address: '',
     confirm_email_address: '',
     password: '',
+    otp: '',
     avatarURL: null,
+    confirmation: null,
   });
   const [hasRequiredDetails, setHasRequiredDetails] = useState<any>(false);
   const [selectedValue, setSelectedValue] = useState<any>('trx');
   const [isValidTrakName, setIsValidTrakName] = useState(false);
   const [isValidTrakSymbol, setIsValidTrakSymbol] = useState(false);
   const [isValidAvatarURL, setIsValidAvatarURL] = useState(false);
+  const [isValidPhoneNumber, setIsValidPhoneNumber] = useState(false);
   const [isValidPassword, setIsValidPassword] = useState(false);
+  const [isValidOTP, setIsValidOTP] = useState(false);
   const [seePassword, setSeePassword] = useState(false);
   const [isValidConfirmEmail, setIsValidConfirmEmail] = useState(false);
   const [uploadLoading, setUploadLoading] = useState(false);
+  const [selectedPhoneCode, setSelectedPhoneCode] = useState(null);
 
   const {
     params: {profile},
@@ -82,21 +88,25 @@ export const useDetails = ({navigation, route}: any) => {
       case 'password':
         setDetails({...details, password: text});
         break;
+      case 'phone_number':
+        setDetails({...details, phone_number: text});
+        break;
+      case 'otp':
+        setDetails({...details, otp: text});
+        break;
+      default:
+        break;
     }
   };
 
   const handleNavigateNext = () => {
-    const isValidForm =
-      isValidTrakName &&
-      isValidTrakSymbol &&
-      isValidPassword &&
-      isValidConfirmEmail &&
-      isValidAvatarURL;
+    const isValidForm = isValidTrakName && isValidPhoneNumber && isValidOTP;
 
     if (isValidForm) {
       const detailForm = {
         ...details,
         trak_name: `${details.trak_name}.${selectedValue}`,
+        phone_number: `${selectedPhoneCode.callingCode} ${details.phone_number}`,
       };
 
       console.log({...profile, ...detailForm}, 'checkeerr');
@@ -197,6 +207,47 @@ export const useDetails = ({navigation, route}: any) => {
     setUploadLoading(false);
   };
 
+  const handleConfirmPhone = async () => {
+    if (isValidPhoneNumber) {
+      setIsValidOTP(false);
+      setDetails({...details, otp: ''});
+    } else {
+      console.log(
+        '🚀 ~ handleConfirmPhone ~ selectedPhoneCode:',
+        selectedPhoneCode.callingCode + details.phone_number,
+      );
+
+      const number = `${selectedPhoneCode.callingCode} ${details.phone_number}`;
+      console.log('🚀 ~ handleConfirmPhone ~ number:', number);
+
+      const confirmation = await auth()
+        .signInWithPhoneNumber(number)
+        .then(confirmation => {
+          setDetails({
+            ...details,
+            confirmation,
+          });
+        })
+        .catch(err => {
+          console.log('🚀 ~ handleConfirmPhone ~ err:', err);
+        });
+      console.log('🚀 ~ handleConfirmPhone ~ confirmation:', confirmation);
+    }
+    setIsValidPhoneNumber(!isValidPhoneNumber);
+  };
+
+  const handleConfirmOTP = async () => {
+    if (!isValidOTP) {
+      setDetails({
+        ...details,
+        confirmation: (otp: string) => details.confirmation.confirm(otp),
+      });
+      // console.log('🚀 ~ handleConfirmOTP ~ confirmation:', confirmation);
+      // setConfirm(confirmation);
+    }
+    setIsValidOTP(!isValidOTP);
+  };
+
   return {
     handleDetailsChange,
     handleNavigateNext,
@@ -212,5 +263,11 @@ export const useDetails = ({navigation, route}: any) => {
     isValidConfirmEmail,
     handleUploadAvatar,
     uploadLoading,
+    handleConfirmPhone,
+    selectedPhoneCode,
+    setSelectedPhoneCode,
+    isValidPhoneNumber,
+    isValidOTP,
+    handleConfirmOTP,
   };
 };

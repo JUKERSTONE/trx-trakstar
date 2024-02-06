@@ -42,7 +42,6 @@ export const handleListenUserProfile = async (user: any, idToken: string) => {
       const payload = user._user;
       const FBaction = setFirebaseProfile(payload);
       store.dispatch(FBaction);
-
       const action = storeKeysTRX(idToken);
       store.dispatch(action);
     });

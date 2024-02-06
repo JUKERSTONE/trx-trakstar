@@ -35,6 +35,7 @@ import {
   handleRetrieveBasket,
   handleInitTRX,
   handleGetTRXRadio,
+  handleRedeemNewProfile,
 } from '.';
 
 import {
@@ -80,7 +81,7 @@ export const TRX_HOC = (InnerComponent: any) => {
         error: null,
       };
 
-      // console.log = function () {};
+      console.log = function () {};
     }
 
     componentDidMount() {
@@ -254,7 +255,7 @@ export const TRX_HOC = (InnerComponent: any) => {
             }
             if (this.state.initializing) this.setState({initializing: false});
           }
-
+          await handleRedeemNewProfile(user);
           const token = await auth()
             .currentUser?.getIdToken(true)
             .then((token: any) => {

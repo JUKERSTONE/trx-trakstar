@@ -6915,6 +6915,11 @@ react-native-codegen@^0.0.13:
     jscodeshift "^0.13.1"
     nullthrows "^1.1.1"
 
+react-native-country-codes-picker@2.3.4:
+  version "2.3.4"
+  resolved "https://registry.npmjs.org/react-native-country-codes-picker/-/react-native-country-codes-picker-2.3.4.tgz#ac6196199cb76a30997a98ed095243c9af34994f"
+  integrity sha512-2TZwEm7jwes65ROs2CLvJMINpswCTKAMUX5qeDK5fQmRH+Zv1ShqcysplBzcZurdT8v9WUg/TeI2C6abE6gQQA==
+
 react-native-device-info@^10.12.0:
   version "10.12.0"
   resolved "https://registry.npmjs.org/react-native-device-info/-/react-native-device-info-10.12.0.tgz#be4e71cbcc9a05e8643b1a419a4450d4cef9bbcc"
@@ -6963,6 +6968,13 @@ react-native-image-picker@^4.8.3:
   version "4.10.3"
   resolved "https://registry.npmjs.org/react-native-image-picker/-/react-native-image-picker-4.10.3.tgz#cdc11d9836b4cfa57e658c0700201babf8fdca10"
   integrity sha512-gLX8J6jCBkUt6jogpSdA7YyaGVLGYywRzMEwBciXshihpFZjc/cRlKymAVlu6Q7HMw0j3vrho6pI8ZGC5O/FGg==
+
+react-native-international-phone-number@^0.7.6:
+  version "0.7.6"
+  resolved "https://registry.npmjs.org/react-native-international-phone-number/-/react-native-international-phone-number-0.7.6.tgz#883d6afc3da345e11e9abd0f08e068cde8d587b8"
+  integrity sha512-j4d/+yoIG7QUpUl7J+C6dpK5n97myAKGEa6SAOORN/BXMjYNkBISu+akEMtWeflSVfYFQixHP5+uwX12hLlYdw==
+  dependencies:
+    react-native-country-codes-picker "2.3.4"
 
 react-native-iphone-x-helper@^1.3.1:
   version "1.3.1"

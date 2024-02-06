@@ -49,6 +49,7 @@
 #endif
   
   [FIRApp configure];
+  [application registerForRemoteNotifications];
 
   UIView *rootView = RCTAppSetupDefaultRootView(bridge, @"LiteList", nil);
 
@@ -64,6 +65,20 @@
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
   return YES;
+}
+
+// Add this method to handle the registration for remote notifications
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+    [[FIRAuth auth] setAPNSToken:deviceToken type:FIRAuthAPNSTokenTypeUnknown];
+}
+
+// Add this method to handle incoming remote notifications
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
+    if ([[FIRAuth auth] canHandleNotification:userInfo]) {
+        completionHandler(UIBackgroundFetchResultNoData);
+        return;
+    }
+    // Handle other remote notifications (if your app needs to handle them)
 }
 
 

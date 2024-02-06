@@ -46,6 +46,22 @@
 				<string>traklist</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.googleusercontent.apps.415546090835-5bm2890qoo46i24o4l48nnpragec2fcc</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.googleusercontent.apps.888109858-gu1ftki4d9r2jpurkmhoettb7pkb8puo</string>
+			</array>
+		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
@@ -76,10 +92,8 @@
 			</dict>
 		</dict>
 	</dict>
-	<key>NSSupportsLiveActivities</key>
-	<string>TrakTube uses Live Activities to provide important updates</string>
 	<key>NSAppleMusicUsageDescription</key>
-	<string>TrakTube uses Apple Music to recommend music. We don&apos;t store your data!</string>
+	<string>TrakTube uses Apple Music to recommend music. We don't store your data!</string>
 	<key>NSCameraUsageDescription</key>
 	<string>Camera Access</string>
 	<key>NSDocumentsFolderUsageDescription</key>
@@ -94,6 +108,8 @@
 	<string>Microphone Access</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Photo Library Access for User Profile Avatars</string>
+	<key>NSSupportsLiveActivities</key>
+	<string>TrakTube uses Live Activities to provide important updates</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>AntDesign.ttf</string>

@@ -30,6 +30,7 @@
 		177F4A592B3A2BC3006A5D78 /* MerchandiseTracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177F4A562B3A2944006A5D78 /* MerchandiseTracking.swift */; };
 		177F4A5C2B3A38A7006A5D78 /* TRXLiveModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177F4A182B39C05F006A5D78 /* TRXLiveModule.swift */; };
 		179C12B82898486100CEDFF6 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 179C12B72898486100CEDFF6 /* StoreKit.framework */; };
+		17F603AD2B68C3E300D00C27 /* TrakStar.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = 17F603AC2B68C3E300D00C27 /* TrakStar.entitlements */; };
 		468510B3FB7E460DA82A74EF /* BigShouldersDisplay-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5953C055D21C434F8714E368 /* BigShouldersDisplay-Light.ttf */; };
 		58D61C8178A642B2AEEC8242 /* BigShouldersDisplay-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 235D1C445DCC42B1A14F6CDB /* BigShouldersDisplay-ExtraLight.ttf */; };
 		6F9352C28B6345E2BB9CB305 /* BigShouldersDisplay-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5BA8E412AAE24285AE48CA88 /* BigShouldersDisplay-ExtraBold.ttf */; };
@@ -121,6 +122,7 @@
 		177F4A532B3A26A4006A5D78 /* TRXLiveAttributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TRXLiveAttributes.swift; sourceTree = "<group>"; };
 		177F4A562B3A2944006A5D78 /* MerchandiseTracking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MerchandiseTracking.swift; sourceTree = "<group>"; };
 		179C12B72898486100CEDFF6 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		17F603AC2B68C3E300D00C27 /* TrakStar.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TrakStar.entitlements; sourceTree = "<group>"; };
 		19F6CBCC0A4E27FBF8BF4A61 /* libPods-LiteList-LiteListTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LiteList-LiteListTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1BF2D59E811F4B11AECA6755 /* FontAwesome5_Brands.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Brands.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Brands.ttf"; sourceTree = "<group>"; };
 		2251F389D75F4354AEB9364D /* Fontisto.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Fontisto.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Fontisto.ttf"; sourceTree = "<group>"; };
@@ -303,6 +305,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				17F603AC2B68C3E300D00C27 /* TrakStar.entitlements */,
 				13B07FAE1A68108700A75B9A /* LiteList */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* LiteListTests */,
@@ -470,6 +473,7 @@
 				727607BEA41C4395A1D090E5 /* BigShouldersDisplay-Regular.ttf in Resources */,
 				BAD58DC311E64DE69AF57E83 /* BigShouldersDisplay-SemiBold.ttf in Resources */,
 				ABC95917A4BD4DC48C378AEB /* Manrope-Bold.ttf in Resources */,
+				17F603AD2B68C3E300D00C27 /* TrakStar.entitlements in Resources */,
 				853C576475F34B86924F4CD3 /* Manrope-ExtraBold.ttf in Resources */,
 				81BD23536D2D480BB3196C1A /* Manrope-ExtraLight.ttf in Resources */,
 				A1C81E8DF02C41C082C957B4 /* Manrope-Light.ttf in Resources */,
@@ -802,7 +806,7 @@
 				CODE_SIGN_ENTITLEMENTS = LiteList/LiteList.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 224;
+				CURRENT_PROJECT_VERSION = 225;
 				DEVELOPMENT_TEAM = 3J39XKJXT5;
 				ENABLE_BITCODE = NO;
 				HEADER_SEARCH_PATHS = (
@@ -910,7 +914,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.124.0;
+				MARKETING_VERSION = 0.125.0;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -938,7 +942,7 @@
 				CODE_SIGN_ENTITLEMENTS = LiteList/LiteList.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 224;
+				CURRENT_PROJECT_VERSION = 225;
 				DEVELOPMENT_TEAM = 3J39XKJXT5;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1045,7 +1049,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.124.0;
+				MARKETING_VERSION = 0.125.0;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -1072,12 +1076,10 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = "";
-				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 3J39XKJXT5;
+				DEVELOPMENT_TEAM = 3J39XKJXT5;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TRX/Info.plist;
@@ -1095,7 +1097,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.bernie.trk.TRX;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "TRX Activity";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -1140,7 +1141,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.bernie.trk.TRX;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "TRX Activity";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "match AppStore com.bernie.trk.TRX";
 				SKIP_INSTALL = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_EMIT_LOC_STRINGS = YES;

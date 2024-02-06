@@ -50,6 +50,7 @@
     "react-native-gesture-handler": "^2.4.1",
     "react-native-iap": "12.4.14",
     "react-native-image-picker": "^4.8.3",
+    "react-native-international-phone-number": "^0.7.6",
     "react-native-keep-awake": "^4.0.0",
     "react-native-keychain": "^8.1.1",
     "react-native-linear-gradient": "^2.5.6",

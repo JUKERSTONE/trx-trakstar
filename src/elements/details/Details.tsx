@@ -18,6 +18,7 @@ import {VHeader, BHeader, Body, Caption} from '../../elements';
 import {Picker} from '@react-native-picker/picker';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import PhoneInput from 'react-native-international-phone-number';
 
 export const DetailsElement = ({
   handleDetailsChange,
@@ -34,6 +35,12 @@ export const DetailsElement = ({
   isValidConfirmEmail,
   handleUploadAvatar,
   uploadLoading,
+  handleConfirmPhone,
+  selectedPhoneCode,
+  setSelectedPhoneCode,
+  isValidPhoneNumber,
+  isValidOTP,
+  handleConfirmOTP,
 }: any) => {
   const servers = ['btc', 'eth', 'nft', 'trx', 'stx', 'sol', 'tsb'];
   return (
@@ -73,19 +80,15 @@ export const DetailsElement = ({
           height: '100%',
         }}>
         <View style={{padding: 15, backgroundColor: '#1a1a1a'}}>
-          <VHeader type="three" color="#cecece" text={'PROFILE ESSENTIALS.'} />
-          <Caption
-            type="one"
-            color="#cecece"
-            text={'Lets begin building your profile.'}
-          />
+          <VHeader type="three" color="#cecece" text={'PROFILE.'} />
+          <Caption type="one" color="#cecece" text={'Lets begin.'} />
         </View>
+
         <View
           style={{
             backgroundColor: '#1a1a1a',
             height: '100%',
             paddingHorizontal: 10,
-            // paddingBottom: 100,
           }}>
           <View style={[{flexDirection: 'row'}, styles.inputContainer]}>
             <View style={{flex: 1, marginRight: 15}}>
@@ -139,223 +142,155 @@ export const DetailsElement = ({
               </View>
             )}
           </View>
-          <View style={[styles.inputContainer, {flexDirection: 'row'}]}>
-            <View style={{flex: 0.8}}>
-              <TextInput
-                onChangeText={text => handleDetailsChange(text, 'trak_symbol')}
-                style={styles.input}
-                placeholder="TRAK SYMBOL (e.g : BTC, ETH, TSB, etc.)"
-                value={details['trak_symbol']}
-                placeholderTextColor="grey"
-                maxLength={4}
-                autoCapitalize="characters"
-              />
-              <Caption
-                type="two"
-                color={'yellow'}
-                text={
-                  'a 3 or 4 letter ticker symbol (e.g : JHN, TRK, BMB, etc) '
-                }
+
+          {details.trak_name ? (
+            <View
+              style={[
+                styles.inputContainer,
+                {
+                  paddingHorizontal: 15,
+                  paddingVertical: 5,
+                  borderRadius: 5,
+                  alignSelf: 'center',
+                  flexDirection: 'row',
+                },
+              ]}>
+              <View style={{justifyContent: 'center'}}>
+                <VHeader
+                  // numberOfLines={1}
+                  type="five"
+                  color={'whitesmoke'}
+                  text={`@`}
+                  textAlign="center"
+                />
+              </View>
+              <VHeader
+                type="four"
+                color={'whitesmoke'}
+                text={`${details.trak_name}.${selectedValue}`}
                 textAlign="center"
               />
             </View>
-            {isValidTrakSymbol && (
-              <View style={{marginLeft: 5}}>
-                <MaterialCommunityIcons
-                  name={'check'}
-                  size={28}
-                  color={'whitesmoke'}
-                  style={{opacity: 0.9, paddingTop: 0}}
+          ) : null}
+
+          <View style={[styles.inputContainer]}>
+            <View style={{flex: 1}}>
+              {!isValidPhoneNumber ? (
+                <PhoneInput
+                  disabled={isValidPhoneNumber}
+                  defaultCountry="GB"
+                  value={details['phone_number']}
+                  onChangePhoneNumber={text =>
+                    handleDetailsChange(text, 'phone_number')
+                  }
+                  selectedCountry={selectedPhoneCode}
+                  onChangeSelectedCountry={setSelectedPhoneCode}
                 />
-              </View>
-            )}
-            <View
-              style={{
-                flexDirection: 'row',
-                alignItems: 'flex-start',
-                justifyContent: 'center',
-              }}>
-              <TouchableOpacity onPress={handleUploadAvatar}>
+              ) : null}
+              <View style={{flexDirection: 'row', flex: 1, marginTop: 10}}>
+                <View>
+                  <Text style={{color: '#fff'}}>
+                    Country:{' '}
+                    {`${selectedPhoneCode?.name?.en} (${selectedPhoneCode?.cca2})`}
+                  </Text>
+                  <Text style={{color: '#fff'}}>
+                    Phone Number: {selectedPhoneCode?.callingCode}{' '}
+                    {details['phone_number']}
+                  </Text>
+                </View>
                 <View
                   style={{
-                    backgroundColor: details.avatarURL ? 'green' : '#cecece',
-                    alignSelf: 'center',
-                    alignItems: 'center',
-                    flexDirection: 'row',
-                    justifyContent: 'center',
-                    paddingVertical: 7,
-                    paddingHorizontal: 10,
-                    borderRadius: 5,
-                    marginLeft: 20,
+                    justifyContent: 'flex-end',
+                    flex: 1,
                   }}>
-                  {!details.avatarURL && (
-                    <MaterialIcons
-                      name={'touch-app'}
-                      size={18}
-                      color={'#1a1a1a'}
-                      style={{opacity: 0.9, marginRight: 5}}
-                    />
-                  )}
-                  {uploadLoading && (
-                    <ActivityIndicator
-                      color="#333333"
-                      size="small"
-                      style={{marginRight: 10}}
-                    />
-                  )}
-                  {details.avatarURL && (
-                    <Image
-                      source={{uri: details.avatarURL}}
+                  <TouchableOpacity onPress={handleConfirmPhone}>
+                    <View
                       style={{
-                        backgroundColor: '#1B4F26',
-                        height: 30,
-                        width: 30,
-                        borderRadius: 10,
-                        marginRight: 10,
-                      }}
-                    />
-                  )}
-                  <VHeader
-                    type="five"
-                    color={details.avatarURL ? '#fff' : '#1a1a1a'}
-                    text={details.avatarURL ? 'uploaded ' : 'upload avatar'}
-                  />
+                        backgroundColor: isValidPhoneNumber
+                          ? 'green'
+                          : '#cecece',
+                        alignSelf: 'center',
+                        alignItems: 'center',
+                        flexDirection: 'row',
+                        justifyContent: 'center',
+                        paddingVertical: 7,
+                        paddingHorizontal: 10,
+                        borderRadius: 5,
+                        marginLeft: 20,
+                      }}>
+                      {!details.avatarURL && (
+                        <MaterialIcons
+                          name={isValidPhoneNumber ? 'cancel' : 'check'}
+                          size={18}
+                          color={'#1a1a1a'}
+                          style={{opacity: 0.9, marginRight: 5}}
+                        />
+                      )}
+                      {uploadLoading && (
+                        <ActivityIndicator
+                          color="#333333"
+                          size="small"
+                          style={{marginRight: 10}}
+                        />
+                      )}
+                      <VHeader
+                        type="five"
+                        color={isValidPhoneNumber ? '#fff' : '#1a1a1a'}
+                        text={isValidPhoneNumber ? 'change ' : 'confirm'}
+                      />
+                    </View>
+                  </TouchableOpacity>
                 </View>
-              </TouchableOpacity>
-              <View>
-                {isValidAvatarURL && (
-                  <View style={{marginLeft: 5}}>
-                    <MaterialCommunityIcons
-                      name={'check'}
-                      size={28}
-                      color={'whitesmoke'}
-                      style={{opacity: 0.9, paddingTop: 0}}
-                    />
-                  </View>
-                )}
               </View>
+              {isValidPhoneNumber ? (
+                <View style={{flexDirection: 'row', marginTop: 15}}>
+                  <TextInput
+                    editable={!isValidOTP}
+                    onChangeText={text => handleDetailsChange(text, 'otp')}
+                    style={{
+                      flex: 1,
+                      backgroundColor: 'whitesmoke',
+                      borderRadius: 5,
+                      padding: 10,
+                    }}
+                    placeholder="ONE TIME PASSWORD"
+                    value={details['otp']}
+                    placeholderTextColor="grey"
+                    autoCapitalize="none"
+                  />
+                  <TouchableOpacity onPress={handleConfirmOTP}>
+                    <View
+                      style={{
+                        backgroundColor: isValidOTP ? 'green' : '#cecece',
+                        alignSelf: 'center',
+                        alignItems: 'center',
+                        flexDirection: 'row',
+                        justifyContent: 'center',
+                        paddingVertical: 7,
+                        paddingHorizontal: 10,
+                        borderRadius: 5,
+                        marginLeft: 20,
+                      }}>
+                      {!details.avatarURL && (
+                        <MaterialIcons
+                          name={isValidOTP ? 'cancel' : 'check'}
+                          size={18}
+                          color={'#1a1a1a'}
+                          style={{opacity: 0.9, marginRight: 5}}
+                        />
+                      )}
+                      <VHeader
+                        type="five"
+                        color={isValidOTP ? '#fff' : '#1a1a1a'}
+                        text={isValidOTP ? 'change ' : 'confirm'}
+                      />
+                    </View>
+                  </TouchableOpacity>
+                </View>
+              ) : null}
             </View>
           </View>
 
-          <View
-            style={[
-              styles.inputContainer,
-              {
-                backgroundColor: 'whitesmoke',
-                paddingHorizontal: 15,
-                paddingVertical: 5,
-                borderRadius: 5,
-                alignSelf: 'center',
-                flexDirection: 'row',
-              },
-            ]}>
-            <View style={{justifyContent: 'center'}}>
-              <VHeader
-                // numberOfLines={1}
-                type="five"
-                color={'#1a1a1a'}
-                text={`@`}
-                textAlign="center"
-              />
-            </View>
-            <VHeader
-              type="four"
-              color={'#1a1a1a'}
-              text={`${details.trak_name}.${selectedValue}`}
-              textAlign="center"
-            />
-            <Caption
-              type="two"
-              color={'#1a1a1a'}
-              text={`   [${details.trak_symbol}]`}
-              textAlign="center"
-            />
-          </View>
-
-          <View style={[styles.inputContainer, {flexDirection: 'row'}]}>
-            <View style={{flex: 1}}>
-              <TextInput
-                style={styles.input}
-                onChangeText={text =>
-                  handleDetailsChange(text, 'email_address')
-                }
-                placeholder="EMAIL ADDRESS"
-                value={details['email_address']}
-                keyboardType="email-address"
-                placeholderTextColor="grey"
-              />
-            </View>
-            <View style={{marginLeft: 5}}>
-              <MaterialCommunityIcons
-                name={'check'}
-                size={28}
-                color={'whitesmoke'}
-                style={{opacity: 0.9, paddingTop: 0}}
-              />
-            </View>
-          </View>
-          <View style={[styles.inputContainer, {flexDirection: 'row'}]}>
-            <View style={{flex: 1}}>
-              <TextInput
-                style={styles.input}
-                onChangeText={text =>
-                  handleDetailsChange(text, 'confirm_email_address')
-                }
-                placeholder="CONFIRM EMAIL ADDRESS"
-                value={details['confirm_email_address']}
-                keyboardType="email-address"
-                placeholderTextColor="grey"
-              />
-            </View>
-            {isValidConfirmEmail && (
-              <View style={{marginLeft: 5}}>
-                <MaterialCommunityIcons
-                  name={'check'}
-                  size={28}
-                  color={'whitesmoke'}
-                  style={{opacity: 0.9, paddingTop: 0}}
-                />
-              </View>
-            )}
-          </View>
-          <View style={[styles.inputContainer, {flexDirection: 'row'}]}>
-            <View style={{flex: 1}}>
-              <TextInput
-                style={styles.input}
-                onChangeText={text => handleDetailsChange(text, 'password')}
-                placeholder="PASSWORD"
-                value={details['password']}
-                secureTextEntry={seePassword ? false : true}
-                placeholderTextColor="grey"
-              />
-              <Caption
-                // numberOfLines={1}
-                type="two"
-                color={'orange'}
-                text={'some text about password strength'}
-              />
-            </View>
-            <TouchableOpacity onPress={handleSeePassword}>
-              <View style={{marginLeft: 5}}>
-                <MaterialCommunityIcons
-                  name={seePassword ? 'eye-off' : 'eye'}
-                  size={28}
-                  color={'whitesmoke'}
-                  style={{opacity: 0.9, paddingTop: 0}}
-                />
-              </View>
-            </TouchableOpacity>
-            {isValidPassword && (
-              <View style={{marginLeft: 5}}>
-                <MaterialCommunityIcons
-                  name={'check'}
-                  size={28}
-                  color={'whitesmoke'}
-                  style={{opacity: 0.9, paddingTop: 0}}
-                />
-              </View>
-            )}
-          </View>
           <TouchableOpacity onPress={handleNavigateNext}>
             <View
               style={{

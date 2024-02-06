@@ -15,6 +15,7 @@ export const profileSlice = createSlice({
       snapchat: null,
       trx: null,
     },
+    unclaimed: null,
   },
   reducers: {
     setFirebaseProfile: (state, action) => {
@@ -24,6 +25,13 @@ export const profileSlice = createSlice({
     setTRXProfile: (state, action) => {
       const TRX = action.payload;
       state.TRX = {...state.TRX, ...TRX};
+    },
+    setUnRedeemedProfile: (state, action) => {
+      const profile = action.payload;
+      state.unclaimed = profile;
+    },
+    claimProfile: state => {
+      state.unclaimed = null;
     },
     setTRAKLANDProfile: (state: any, action) => {
       const {apple_music, spotify} = action.payload;
@@ -145,6 +153,8 @@ export const {
   appendLike,
   unLike,
   setTrakland,
+  setUnRedeemedProfile,
+  claimProfile,
 } = profileSlice.actions;
 
 export const profileReducer = profileSlice.reducer;

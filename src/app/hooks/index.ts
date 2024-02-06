@@ -13,3 +13,4 @@ export * from './basket';
 export * from './useEffectAsync';
 export * from './init-trx';
 export * from './radio';
+export * from './redeem-new-profile';
