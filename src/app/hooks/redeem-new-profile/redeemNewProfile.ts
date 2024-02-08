@@ -53,7 +53,7 @@ export const handleRedeemNewProfile = async (user: any) => {
       spotifyAccessToken: TRXProfile.spotifyAccessToken,
       // location,
       //   password,
-      phone_number: TRXProfile.phone_number,
+      phone_number: TRXProfile.phone_number.replace(/\s+/g, ''),
       // quotable,
       subscription: TRXProfile.subscription,
       trak_name: TRXProfile.trak_name,

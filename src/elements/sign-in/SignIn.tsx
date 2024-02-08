@@ -8,15 +8,29 @@ import {
   Image,
   KeyboardAvoidingView,
   TouchableOpacity,
+  ActivityIndicator,
 } from 'react-native';
 // @ts-ignore
 import ParallaxScrollView from 'react-native-parallax-scroll-view';
 import LinearGradient from 'react-native-linear-gradient';
 import {VHeader, BHeader, Body, Caption} from '../../elements';
 import {Picker} from '@react-native-picker/picker';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import PhoneInput from 'react-native-international-phone-number';
 
-export const SignInElement = ({handleSignInChange, handleSignInEvent}: any) => {
+export const SignInElement = ({
+  handleSignInChange,
+  handleSignInEvent,
+  isValidPhoneNumber,
+  selectedPhoneCode,
+  setSelectedPhoneCode,
+  handleConfirmPhone,
+  handleDetailsChange,
+  details,
+  uploadLoading,
+  isValidOTP,
+  handleConfirmOTP,
+}: any) => {
   return (
     <SafeAreaView style={{flex: 1}}>
       <ParallaxScrollView
@@ -68,42 +82,121 @@ export const SignInElement = ({handleSignInChange, handleSignInEvent}: any) => {
             />
           </View>
           <SafeAreaView style={{margin: 20}}>
-            <View style={styles.inputContainer}>
-              <TextInput
-                onChangeText={text => handleSignInChange({text, type: 'email'})}
-                style={styles.input}
-                placeholder="EMAIL"
-              />
-            </View>
-            <View style={styles.inputContainer}>
-              <TextInput
-                onChangeText={text =>
-                  handleSignInChange({text, type: 'password'})
-                }
-                style={styles.input}
-                placeholder="PASSWORD"
-              />
-            </View>
-
-            <TouchableOpacity onPress={handleSignInEvent}>
-              <View
-                style={{
-                  backgroundColor: 'green',
-                  margin: 5,
-                  borderRadius: 5,
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  padding: 15,
-                }}>
-                <Caption
-                  type="one"
-                  color="#fff"
-                  text={'SIGN ME BACK IN!'}
-                  textAlign="right"
+            <View style={{flex: 1}}>
+              {!isValidPhoneNumber ? (
+                <PhoneInput
+                  disabled={isValidPhoneNumber}
+                  defaultCountry="GB"
+                  value={details['phone_number']}
+                  onChangePhoneNumber={text =>
+                    handleDetailsChange(text, 'phone_number')
+                  }
+                  selectedCountry={selectedPhoneCode}
+                  onChangeSelectedCountry={setSelectedPhoneCode}
                 />
+              ) : null}
+              <View style={{flexDirection: 'row', flex: 1, marginTop: 10}}>
+                <View>
+                  <Text style={{color: '#fff'}}>
+                    Country:{' '}
+                    {`${selectedPhoneCode?.name?.en} (${selectedPhoneCode?.cca2})`}
+                  </Text>
+                  <Text style={{color: '#fff'}}>
+                    Phone Number: {selectedPhoneCode?.callingCode}{' '}
+                    {details['phone_number']}
+                  </Text>
+                </View>
+                <View
+                  style={{
+                    justifyContent: 'flex-end',
+                    flex: 1,
+                  }}>
+                  <TouchableOpacity onPress={handleConfirmPhone}>
+                    <View
+                      style={{
+                        backgroundColor: isValidPhoneNumber
+                          ? 'green'
+                          : '#cecece',
+                        alignSelf: 'center',
+                        alignItems: 'center',
+                        flexDirection: 'row',
+                        justifyContent: 'center',
+                        paddingVertical: 7,
+                        paddingHorizontal: 10,
+                        borderRadius: 5,
+                        marginLeft: 20,
+                      }}>
+                      {!details.avatarURL && (
+                        <MaterialIcons
+                          name={isValidPhoneNumber ? 'cancel' : 'check'}
+                          size={18}
+                          color={'#1a1a1a'}
+                          style={{opacity: 0.9, marginRight: 5}}
+                        />
+                      )}
+                      {uploadLoading && (
+                        <ActivityIndicator
+                          color="#333333"
+                          size="small"
+                          style={{marginRight: 10}}
+                        />
+                      )}
+                      <VHeader
+                        type="five"
+                        color={isValidPhoneNumber ? '#fff' : '#1a1a1a'}
+                        text={isValidPhoneNumber ? 'change ' : 'confirm'}
+                      />
+                    </View>
+                  </TouchableOpacity>
+                </View>
               </View>
-            </TouchableOpacity>
+              {isValidPhoneNumber ? (
+                <View style={{flexDirection: 'row', marginTop: 15}}>
+                  <TextInput
+                    editable={!isValidOTP}
+                    onChangeText={text => handleDetailsChange(text, 'otp')}
+                    style={{
+                      flex: 1,
+                      backgroundColor: 'whitesmoke',
+                      borderRadius: 5,
+                      padding: 10,
+                    }}
+                    placeholder="ONE TIME PASSWORD"
+                    value={details['otp']}
+                    placeholderTextColor="grey"
+                    autoCapitalize="none"
+                  />
+                  <TouchableOpacity onPress={handleConfirmOTP}>
+                    <View
+                      style={{
+                        backgroundColor: isValidOTP ? 'green' : '#cecece',
+                        alignSelf: 'center',
+                        alignItems: 'center',
+                        flexDirection: 'row',
+                        justifyContent: 'center',
+                        paddingVertical: 7,
+                        paddingHorizontal: 10,
+                        borderRadius: 5,
+                        marginLeft: 20,
+                      }}>
+                      {!details.avatarURL && (
+                        <MaterialIcons
+                          name={isValidOTP ? 'cancel' : 'check'}
+                          size={18}
+                          color={'#1a1a1a'}
+                          style={{opacity: 0.9, marginRight: 5}}
+                        />
+                      )}
+                      <VHeader
+                        type="five"
+                        color={isValidOTP ? '#fff' : '#1a1a1a'}
+                        text={isValidOTP ? 'change ' : 'confirm'}
+                      />
+                    </View>
+                  </TouchableOpacity>
+                </View>
+              ) : null}
+            </View>
           </SafeAreaView>
         </KeyboardAvoidingView>
       </ParallaxScrollView>

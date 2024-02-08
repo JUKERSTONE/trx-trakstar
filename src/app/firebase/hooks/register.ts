@@ -10,6 +10,7 @@ import {api, useAPI} from '../../../api';
 import messaging from '@react-native-firebase/messaging';
 import {useFirebase, handleAppendSubscription} from '../../../app';
 import {useTRX} from '../../hooks/useTRX';
+import {handleValidateProfile} from './validatateProfile';
 
 const {useGET} = useAPI();
 const {handleStore, handleGet} = useAsyncStorage();
@@ -48,6 +49,14 @@ export const handleRegister = async ({
     confirmation,
     otp,
   } = TRXProfile;
+
+  const exists = await handleValidateProfile(phone_number);
+  console.log('🚀 ~ exists:', exists);
+
+  if (exists) {
+    alert('Profile already exists');
+    throw new Error('Profile already exists');
+  }
 
   const fcm_token = await messaging()
     .getToken()

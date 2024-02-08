@@ -153,7 +153,7 @@ export const usePayWall = ({navigation, route}: any) => {
           navigation,
           userPackage: null,
           handleRequestTRX,
-        });
+        }).catch(() => navigation.goBack());
         break;
       case 'musichead':
         try {
@@ -224,9 +224,10 @@ export const usePayWall = ({navigation, route}: any) => {
           //   // Unlock that great "pro" content
           // }
         } catch (e) {
-          if (!e.userCancelled) {
-            showError(e);
-          }
+          navigation.goBack();
+          // if (!e.userCancelled) {
+          //   showError(e);
+          // }
         }
         break;
       default:
