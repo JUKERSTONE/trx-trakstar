@@ -23,8 +23,7 @@ jobs:
 
       - name: Install dependencies
         run: | 
-          yarn install
-          | cd ios | pod install | bundle install
+          yarn install | cd ios | pod install | bundle install
 
 
       - name: Build & upload iOS binary
