@@ -23,11 +23,11 @@ jobs:
 
       - name: Install dependencies
         run: | 
-          yarn install
-          cd ios && (
-            rm -rf Pods Podfile.lock
-            pod install
-          )
+          yarn install |
+          cd ios |
+          rm -rf Pods |
+          rm -rf Podfile.lock |
+          pod install
 
       - name: Bundle Install
         run: bundle install
