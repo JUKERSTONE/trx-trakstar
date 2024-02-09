@@ -21,10 +21,14 @@ jobs:
         run: |
           echo $CERTIFICATE_BASE64 | base64 --decode > signing-cert.p12
 
+      - name: Install dependencies
+        run: | 
+          yarn install
+          | cd ios | pod install | bundle install
+
+
       - name: Build & upload iOS binary
-        run: |
-          cd ios | bundle install |
-          bundle exec fastlane ios build_upload_testflight
+        run: bundle exec fastlane ios build_upload_testflight
         env:
           ASC_KEY_ID: ${{ secrets.ASC_KEY_ID }}
           ASC_ISSUER_ID: ${{ secrets.ASC_ISSUER_ID }}
