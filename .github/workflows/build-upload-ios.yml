@@ -25,8 +25,6 @@ jobs:
         run: | 
           yarn install |
           cd ios |
-          rm -rf Pods |
-          rm -rf Podfile.lock |
           pod install
 
       - name: Build & upload iOS binary
