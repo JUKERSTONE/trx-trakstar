@@ -23,6 +23,7 @@ jobs:
 
       - name: Install dependencies
         run: | 
+          yarn cache clean &&
           yarn install &&
           cd ios &&
           rm -rf Pods Podfile.lock &&
