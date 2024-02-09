@@ -23,8 +23,12 @@ jobs:
 
       - name: Install dependencies
         run: | 
-          yarn install | cd ios | pod install | bundle install
-
+          yarn install |
+          cd ios |
+          rm -rf Pods |
+          rm -rf Podfile.lock |
+          pod install |
+          brew install fastlane 
 
       - name: Build & upload iOS binary
         run: bundle exec fastlane ios build_upload_testflight
