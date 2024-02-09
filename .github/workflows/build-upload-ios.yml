@@ -10,10 +10,11 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Set up ruby env
-        uses: ruby/setup-ruby@v1.138.0
+      - uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '3.0.2'
-          bundler-cache: true
+          ruby-version: '3.3.0' # specify the exact Ruby version
+          bundler-cache: true # optional: if you want to cache gems between runs
+
 
       - name: Decode signing certificate into a file
         env:
