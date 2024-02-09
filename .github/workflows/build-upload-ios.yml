@@ -12,7 +12,7 @@ jobs:
       - name: Set up ruby env
         uses: ruby/setup-ruby@v1.138.0
         with:
-          ruby-version: 2.7.4
+          ruby-version: 3.2.2
           bundler-cache: true
 
       - name: Decode signing certificate into a file
@@ -25,7 +25,10 @@ jobs:
         run: | 
           yarn install |
           cd ios |
-          pod install
+          rm -rf Pods |
+          rm -rf Podfile.lock |
+          pod install |
+          brew install fastlane 
 
       - name: Build & upload iOS binary
         run: bundle exec fastlane ios build_upload_testflight
