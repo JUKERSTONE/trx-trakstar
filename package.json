@@ -75,7 +75,7 @@
     "react-native-uuid": "^2.0.1",
     "react-native-vector-icons": "^9.1.0",
     "react-native-video": "^5.2.0",
-    "react-native-webview": "git+https://github.com/TSB-M3DIA/react-native-webview-pip.git",
+    "react-native-webview": "^13.7.1",
     "react-native-youtube-iframe": "git+https://github.com/TSB-M3DIA/react-native-youtube-pip.git",
     "react-native-ytdl": "^4.8.3",
     "react-redux": "^8.0.1",
