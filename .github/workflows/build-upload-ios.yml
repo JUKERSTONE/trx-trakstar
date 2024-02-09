@@ -14,38 +14,21 @@ jobs:
         with:
           ruby-version: '3.3.0' # specify the exact Ruby version
           bundler-cache: true # optional: if you want to cache gems between runs
-          
+
+
       - name: Decode signing certificate into a file
         env:
           CERTIFICATE_BASE64: ${{ secrets.IOS_DIST_SIGNING_KEY }}
         run: |
           echo $CERTIFICATE_BASE64 | base64 --decode > signing-cert.p12
 
-      # - name: Install dependencies
-      #   run: | 
-      #     yarn cache clean &&
-      #     yarn install &&
-      #     cd ios &&
-      #     rm -rf Pods Podfile.lock &&
-      #     pod install
-
-      - name: Set Yarn Registry
-        run: yarn config set registry https://registry.yarnpkg.com/
-
-      - name: Clear Yarn Cache
-        run: yarn cache clean
-
-      - name: Install Yarn Dependencies
-        run: yarn install
-
-      - name: Setup iOS Environment
-        run: |
-          cd ios &&
-          rm -rf Pods Podfile.lock &&
-          pod install
-
-      - name: Bundle Install
-        run: bundle install
+      - name: Install dependencies
+        run: | 
+          yarn install |
+          cd ios |
+          rm -rf Pods |
+          rm -rf Podfile.lock |
+          pod install 
 
       - name: Build & upload iOS binary
         run: bundle exec fastlane ios build_upload_testflight
