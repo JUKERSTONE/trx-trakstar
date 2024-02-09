@@ -29,11 +29,14 @@ jobs:
       #     rm -rf Pods Podfile.lock &&
       #     pod install
 
+      - name: Set Yarn Registry
+        run: yarn config set registry https://registry.yarnpkg.com/
+
       - name: Clear Yarn Cache
-        run: yarn cache clean --force
+        run: yarn cache clean
 
       - name: Install Yarn Dependencies
-        run: yarn install --verbose
+        run: yarn install
 
       - name: Setup iOS Environment
         run: |
