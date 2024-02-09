@@ -27,8 +27,7 @@ jobs:
           cd ios |
           rm -rf Pods |
           rm -rf Podfile.lock |
-          pod install |
-          brew install fastlane 
+          pod install 
 
       - name: Build & upload iOS binary
         run: bundle exec fastlane ios build_upload_testflight
