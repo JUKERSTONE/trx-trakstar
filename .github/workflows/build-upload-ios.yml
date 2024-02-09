@@ -30,10 +30,10 @@ jobs:
       #     pod install
 
       - name: Clear Yarn Cache
-        run: yarn cache clean
+        run: yarn cache clean --force
 
       - name: Install Yarn Dependencies
-        run: yarn install --force
+        run: yarn install --verbose
 
       - name: Setup iOS Environment
         run: |
