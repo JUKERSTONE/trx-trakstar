@@ -13,6 +13,13 @@
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		15E3C6F614D247919C691D56 /* Manrope-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9B9747830CE4424382BFD0F9 /* Manrope-Medium.ttf */; };
+		170F55A22B773BA5001D63F3 /* NowPlayable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 170F559E2B773BA4001D63F3 /* NowPlayable.swift */; };
+		170F55A32B773BA5001D63F3 /* NowPlayableMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 170F559F2B773BA4001D63F3 /* NowPlayableMetadata.swift */; };
+		170F55A42B773BA5001D63F3 /* NowPlayableCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 170F55A02B773BA5001D63F3 /* NowPlayableCommand.swift */; };
+		170F55A52B773BA5001D63F3 /* NowPlayableError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 170F55A12B773BA5001D63F3 /* NowPlayableError.swift */; };
+		170F55A72B773BCA001D63F3 /* IOSNowPlayableBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 170F55A62B773BC9001D63F3 /* IOSNowPlayableBehavior.swift */; };
+		170F55A92B773E5F001D63F3 /* NowPlayableHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 170F55A82B773E5F001D63F3 /* NowPlayableHeader.m */; };
+		170F55AB2B773F4C001D63F3 /* NowPlayableModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 170F55AA2B773F4C001D63F3 /* NowPlayableModule.swift */; };
 		173F058B28AFD3B300FA88EA /* SpotifyiOS.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 173F058A28AFD3B300FA88EA /* SpotifyiOS.xcframework */; };
 		173F058C28AFD3B300FA88EA /* SpotifyiOS.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 173F058A28AFD3B300FA88EA /* SpotifyiOS.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		177F4A1B2B39C0A8006A5D78 /* TRXLiveHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 177F4A1A2B39C0A8006A5D78 /* TRXLiveHeader.m */; };
@@ -106,6 +113,13 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = LiteList/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = LiteList/main.m; sourceTree = "<group>"; };
 		1703DFC728398D7900F5B9B0 /* LiteList.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = LiteList.entitlements; path = LiteList/LiteList.entitlements; sourceTree = "<group>"; };
+		170F559E2B773BA4001D63F3 /* NowPlayable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NowPlayable.swift; sourceTree = "<group>"; };
+		170F559F2B773BA4001D63F3 /* NowPlayableMetadata.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NowPlayableMetadata.swift; sourceTree = "<group>"; };
+		170F55A02B773BA5001D63F3 /* NowPlayableCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NowPlayableCommand.swift; sourceTree = "<group>"; };
+		170F55A12B773BA5001D63F3 /* NowPlayableError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NowPlayableError.swift; sourceTree = "<group>"; };
+		170F55A62B773BC9001D63F3 /* IOSNowPlayableBehavior.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IOSNowPlayableBehavior.swift; sourceTree = "<group>"; };
+		170F55A82B773E5F001D63F3 /* NowPlayableHeader.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NowPlayableHeader.m; sourceTree = "<group>"; };
+		170F55AA2B773F4C001D63F3 /* NowPlayableModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NowPlayableModule.swift; sourceTree = "<group>"; };
 		173F058A28AFD3B300FA88EA /* SpotifyiOS.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = SpotifyiOS.xcframework; path = "../node_modules/react-native-spotify-remote/ios/external/SpotifySDK/SpotifyiOS.xcframework"; sourceTree = "<group>"; };
 		174C46A828AF0A590078F86E /* SpotifyiOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpotifyiOS.framework; path = "../node_modules/react-native-spotify-remote/ios/external/SpotifySDK/SpotifyiOS.framework"; sourceTree = "<group>"; };
 		177F4A032B398C72006A5D78 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
@@ -224,8 +238,22 @@
 				177F4A182B39C05F006A5D78 /* TRXLiveModule.swift */,
 				177F4A1A2B39C0A8006A5D78 /* TRXLiveHeader.m */,
 				177F4A1C2B39C423006A5D78 /* LiteList-Bridging-Header.h */,
+				170F55A82B773E5F001D63F3 /* NowPlayableHeader.m */,
+				170F55AA2B773F4C001D63F3 /* NowPlayableModule.swift */,
 			);
 			name = LiteList;
+			sourceTree = "<group>";
+		};
+		170F559C2B773B3D001D63F3 /* NowPlayable */ = {
+			isa = PBXGroup;
+			children = (
+				170F559E2B773BA4001D63F3 /* NowPlayable.swift */,
+				170F55A02B773BA5001D63F3 /* NowPlayableCommand.swift */,
+				170F55A12B773BA5001D63F3 /* NowPlayableError.swift */,
+				170F559F2B773BA4001D63F3 /* NowPlayableMetadata.swift */,
+				170F55A62B773BC9001D63F3 /* IOSNowPlayableBehavior.swift */,
+			);
+			path = NowPlayable;
 			sourceTree = "<group>";
 		};
 		177F4A412B39CA56006A5D78 /* TRX */ = {
@@ -306,6 +334,7 @@
 			isa = PBXGroup;
 			children = (
 				17F603AC2B68C3E300D00C27 /* TrakStar.entitlements */,
+				170F559C2B773B3D001D63F3 /* NowPlayable */,
 				13B07FAE1A68108700A75B9A /* LiteList */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* LiteListTests */,
@@ -701,11 +730,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				170F55A52B773BA5001D63F3 /* NowPlayableError.swift in Sources */,
 				177F4A522B39CAA0006A5D78 /* TRXLiveActivity.swift in Sources */,
 				177F4A5C2B3A38A7006A5D78 /* TRXLiveModule.swift in Sources */,
+				170F55A42B773BA5001D63F3 /* NowPlayableCommand.swift in Sources */,
+				170F55A72B773BCA001D63F3 /* IOSNowPlayableBehavior.swift in Sources */,
+				170F55A22B773BA5001D63F3 /* NowPlayable.swift in Sources */,
 				177F4A582B3A2A9A006A5D78 /* TRXLiveAttributes.swift in Sources */,
 				13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */,
+				170F55AB2B773F4C001D63F3 /* NowPlayableModule.swift in Sources */,
+				170F55A32B773BA5001D63F3 /* NowPlayableMetadata.swift in Sources */,
 				177F4A572B3A2944006A5D78 /* MerchandiseTracking.swift in Sources */,
+				170F55A92B773E5F001D63F3 /* NowPlayableHeader.m in Sources */,
 				177F4A1B2B39C0A8006A5D78 /* TRXLiveHeader.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 			);

@@ -12,21 +12,10 @@
 
 @interface RCT_EXTERN_MODULE(TRXLiveModule, RCTEventEmitter)
 
-//RCT_EXTERN_METHOD(startActivity)
 RCT_EXTERN_METHOD(
   request:(NSString *)activityId
   contentState:(NSDictionary *)contentState
 )
-//RCT_EXTERN_METHOD(endActivity)
 RCT_EXTERN_METHOD(updateActivity: (NSDictionary *)contentState)
-//RCT_EXTERN_METHOD(
-//  request:(NSString *)activityId
-//  contentState:(NSDictionary *)contentState
-//)
-//RCT_EXTERN_METHOD(supportedEvents)
-//RCT_EXTERN_METHOD(
-//  endActivityById: (NSString *)activityId
-//)
-//RCT_EXTERN_METHOD(endAll)
 
 @end
