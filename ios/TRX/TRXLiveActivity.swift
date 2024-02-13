@@ -92,9 +92,22 @@ struct TRXLiveActivity: Widget {
     var body: some WidgetConfiguration {
         ActivityConfiguration(for: MerchandiseTrackingWidgetAttributes.self) { context in
             // Lock screen/banner UI goes here
-            VStack {
-                Text(context.state.playerTitle)
-            }
+          HStack {
+            AsyncImage(url: URL(string: context.state.merchandiseImage)) { image in
+                  image.resizable()
+              } placeholder: {
+                  ProgressView()
+              }
+              .frame(width: 50, height: 50)
+              .aspectRatio(contentMode: .fit)
+
+              VStack(alignment: .leading) {
+                  Text(context.state.merchandiseTitle)
+                  Text(context.state.merchandisePromotion)
+                  Text(context.state.merchandisePrice)
+              }
+              .padding(.leading, 8)
+          }
             .activityBackgroundTint(Color.cyan)
             .activitySystemActionForegroundColor(Color.black)
             .widgetURL(URL(string: "traklist://app/auction/\(context.state.auctionId)"))

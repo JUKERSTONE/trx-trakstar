@@ -7,6 +7,7 @@ import {
   Dimensions,
   Alert,
   Button,
+  NativeModules,
 } from 'react-native';
 import React, {useContext} from 'react';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
@@ -66,6 +67,8 @@ export const HeaderElement = ({
   const userCategory = TRXProfile.userCategory;
 
   const {userData, setUserData} = useContext(PlayerContext);
+
+  const {IOSNowPlayableBehavior} = NativeModules;
 
   return (
     <SafeAreaView
@@ -280,6 +283,15 @@ export const HeaderElement = ({
                       text: 'Clear Cache',
                       onPress: handleClearCache,
                     },
+                    {
+                      text: 'Test NPW',
+                      onPress: () => {
+                        IOSNowPlayableBehavior.updateNowPlayingInfoWithTitle(
+                          'Song Title',
+                          'Artist Name',
+                        );
+                      },
+                    },
                   ])
                 : Alert.alert(`Menu`, `What would you like to do?`, [
                     {
@@ -315,6 +327,16 @@ export const HeaderElement = ({
                       text: 'Delete Account',
                       onPress: async () =>
                         handleAuthentication(isModal, 'delete'),
+                    },
+                    {
+                      text: 'Test NPW',
+                      onPress: () => {
+                        IOSNowPlayableBehavior.configureRemoteCommandCenter();
+                        // IOSNowPlayableBehavior.updateNowPlayingInfoWithTitle(
+                        //   'Song Title',
+                        //   'Artist Name',
+                        // );
+                      },
                     },
                   ])
             }>

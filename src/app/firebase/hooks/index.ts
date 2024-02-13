@@ -43,3 +43,4 @@ export * from './getCategories';
 export * from './getProductsByCategory';
 export * from './getTRX01';
 export * from './getTRX02';
+export * from './generateProduct';

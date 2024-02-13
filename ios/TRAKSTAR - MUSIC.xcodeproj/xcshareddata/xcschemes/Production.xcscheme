@@ -57,9 +57,18 @@
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
             BuildableName = "LiteList.app"
             BlueprintName = "LiteList"
-            ReferencedContainer = "container:LiteList.xcodeproj">
+            ReferencedContainer = "container:TRAKSTAR - MUSIC.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
+            BuildableName = "LiteList.app"
+            BlueprintName = "LiteList"
+            ReferencedContainer = "container:LiteList.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"

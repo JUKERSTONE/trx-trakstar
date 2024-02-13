@@ -1,7 +1,7 @@
 import {useCallback, useEffect, useRef} from 'react';
 import {NativeEventEmitter, NativeModules, Platform} from 'react-native';
 import {useSelector} from 'react-redux';
-// import {OrderStatusLogStatus as OrderStatus} from '../../Gateway/Types/gateway-types';
+// import {TRXStatusLogStatus as TRXStatus} from '../../Gateway/Types/gateway-types';
 // import {logWarning} from '../../Log/helpers/logWarning';
 // import {useMobx} from '../../State/StateProvider';
 // import {useTranslation} from '../../Translation/TranslationProvider';
@@ -15,7 +15,7 @@ const TRXLiveModuleModuleEventEmitter = (() =>
 
 const ON_PUSH_TOKEN_EVENT = 'onPushToken';
 
-type UseOrderLiveActivityOptions = {
+type UseTRXLiveActivityOptions = {
   /**
    * How long to wait for live activity APNS token to be returned.
    */
@@ -28,12 +28,10 @@ type UseOrderLiveActivityOptions = {
 
 /**
  * Creates a function to request an iOS Live Activity. That function returns an APNS push token
- * that must be added to an order by including it in the basket/checkout. When the Live Activity
- * is dismissed by the user and should be restarted, the new APNS token must be stored on the order.
+ * that must be added to an TRX by including it in the basket/checkout. When the Live Activity
+ * is dismissed by the user and should be restarted, the new APNS token must be stored on the TRX.
  */
-export function useOrderLiveActivity(
-  options: UseOrderLiveActivityOptions = {},
-) {
+export function useTRXLiveActivity(options: UseTRXLiveActivityOptions = {}) {
   //   const {t} = useTranslation();
   //   const {feature} = useMobx();
   //   const {etaShort, etaLong} = useEta();
@@ -90,8 +88,8 @@ export function useOrderLiveActivity(
             playerArtist: player.artist,
             merchandiseImage: 'ee',
             merchandiseTitle: 'ee',
-            merchandisePromotion: '', // The order ID will be provided later by APNS push updates.
-            isPlaying: false, // The order ID will be provided later by APNS push updates.
+            merchandisePromotion: '', // The TRX ID will be provided later by APNS push updates.
+            isPlaying: false, // The TRX ID will be provided later by APNS push updates.
           },
         );
       });

@@ -14,6 +14,7 @@ import {
 } from 'react-native';
 import MediaPlayer from 'react-native-video';
 import {
+  handleGenerateProduct,
   handleGetTRX00,
   handleLikeTRAK,
   useEffectAsync,
@@ -53,7 +54,7 @@ import RNFetchBlob from 'rn-fetch-blob';
 import FastImage from 'react-native-fast-image';
 import {TRXPictureInPictureContainer} from '../../containers/trx-picture-in-picture';
 import {useTRX} from '../../app/hooks/useTRX';
-import {useOrderLiveActivity} from '../../app/hooks/live-activity/useLiveActivity';
+import {useTRXLiveActivity} from '../../app/hooks/live-activity/useLiveActivity';
 import firestore from '@react-native-firebase/firestore';
 import uuid from 'react-native-uuid';
 import {handleTRX00SpotifyDependancies} from '../../app/handlers/trx00SpotifyDependencies';
@@ -156,66 +157,72 @@ export const TRAKLISTradioElement = (...props) => {
     }
   }, [youtubeMinimize]);
 
-  const {requestLiveActivity, updateActivity} = useOrderLiveActivity();
+  const {requestLiveActivity, updateActivity} = useTRXLiveActivity();
 
   useEffectAsync(async () => {
-    if (!artist) {
-      const apnToken = await requestLiveActivity('dvc', {
+    const product = await handleGenerateProduct();
+    console.log('🚀 ~ useEffectAsync ~ product:', product);
+
+    const apnToken = await requestLiveActivity(
+      product.content.activityId as string,
+      {
         playerImage: image.uri,
         playerTitle: title,
         playerArtist: artist,
-        merchandiseImage: 'ee',
-        merchandiseTitle: 'ee',
-        merchandisePromotion: 'efe', // The order ID will be provided later by APNS push updates.
-        isPlaying: false, // The order ID will be provided later by APNS push updates.
+        merchandiseImage: product.content.product?.variants[0].imageUrls[0],
+        merchandiseTitle: product.content.product?.brand,
+        merchandisePromotion: product.content.product?.promo,
+        merchandisePrice: `${product.content.product?.variants[0].currency} ${product.content.product?.variants[0].amount}`,
+        isPlaying: false,
         auctionId: 'efe',
-      });
+      },
+    );
 
-      console.log(
-        '🚀 ~ file: TRAKLISTradio.tsx:175 ~ useEffect ~ apnToken:',
-        apnToken,
-      );
+    console.log(
+      '🚀 ~ file: TRAKLISTradio.tsx:175 ~ useEffect ~ apnToken:',
+      apnToken,
+    );
 
-      await firestore()
-        .doc(`users/${profile.TRX.id}`)
-        .update({apnToken: apnToken});
+    await firestore()
+      .doc(`users/${profile.TRX.id}`)
+      .update({activityId: product.content.activityId});
 
-      // perpetual notification live activity trigger
+    await firestore()
+      .doc(`ios-live-activities/${product.content.activityId}`)
+      .update({apnToken});
 
-      const url = api.bernie({method: 'apn'});
-      const data = await usePOST({
-        route: url,
-        payload: {
-          contentState: {
-            playerImage: 'player',
-            playerTitle: 'player',
-            playerArtist: 'playert',
-            merchandiseImage: 'ee',
-            merchandiseTitle: 'ee',
-            merchandisePromotion: 'ewe',
-            isPlaying: false,
-            auctionId: 'efe',
-          },
-          token: apnToken,
-        },
-      });
+    // perpetual notification live activity trigger
 
-      // console.log(
-      //   '🚀 ~ file: TRAKLISTradio.tsx:191 ~ useEffectAsync ~ data:',
-      //   data,
-      // );
+    const url = api.bernie({method: 'apn'});
+    const {useGET} = useAPI();
 
-      // publish to apn server
-    } else
-      updateActivity({
-        playerImage: image.uri,
-        playerTitle: title,
-        playerArtist: artist,
-        merchandiseImage: 'ee',
-        merchandiseTitle: 'ee',
-        merchandisePromotion: 'efe', // The order ID will be provided later by APNS push updates.
-        isPlaying: true, // The order ID will be provided later by APNS push updates.
-      });
+    const data = await useGET({route: url});
+    console.log('🚀 ~ useEffectAsync ~ data:', data);
+
+    // const data = await usePOST({
+    //   route: url,
+    //   // payload: {
+    //   //   contentState: {
+    //   //     playerImage: 'player',
+    //   //     playerTitle: 'player',
+    //   //     playerArtist: 'playert',
+    //   //     merchandiseImage: 'ee',
+    //   //     merchandiseTitle: 'ee',
+    //   //     merchandisePromotion: 'ewe',
+    //   //     merchandisePrice: '20',
+    //   //     isPlaying: false,
+    //   //     auctionId: 'efe',
+    //   //   },
+    //   //   token: apnToken,
+    //   // },
+    // });
+
+    // console.log(
+    //   '🚀 ~ file: TRAKLISTradio.tsx:191 ~ useEffectAsync ~ data:',
+    //   data,
+    // );
+
+    // publish to apn server
   }, [title, image.uri, artist]);
 
   useEffect(() => {

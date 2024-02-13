@@ -34,7 +34,7 @@ export const handleBernieAPI = ({method, payload}: any) => {
     case 'trx-radio':
       return `${base}/trx/radio`;
     case 'apn':
-      return `${base}/trx/notification`;
+      return `${base}/triggerLiveMerchandise`;
     default:
       alert('Invalid Method');
       return '';
