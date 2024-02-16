@@ -49,6 +49,7 @@ export const ListsStack = () => {
               hasShazam={!isStorefront}
               {...props}
               hasTRAKLIST
+              isOffline
             />
           ),
           // title: 'LISTS',

@@ -35,28 +35,41 @@ export const OnboardIslandElement = ({
     <View
       style={{
         height: 75,
-        marginHorizontal: 20,
+        paddingHorizontal: 20,
         flexDirection: 'row',
         alignItems: 'center',
+        backgroundColor: '#232323',
       }}>
       {trx.map((item: any) => (
         <Image
           style={{
             height: 40,
             width: 40,
+            margin: 5,
             borderRadius: 10,
             backgroundColor: '#2323cc',
+            borderWidth: 1.5,
+            borderColor: '#1db94a',
           }}
           source={{uri: item.trak.cover_art}}
         />
       ))}
       {trx.length - 4 > -1 ? (
         <View style={{flex: 1, marginLeft: 10}}>
-          <Button title="GO" onPress={handleStartTRX} />
+          <VHeader
+            type="five"
+            color={'#fff'}
+            text={'TRX Radio seeds selected'}
+          />
+          <Caption type="two" color={'grey'} text={'Select GO in header!'} />
         </View>
       ) : (
         <View style={{flex: 1, marginLeft: 10}}>
-          <Text>{`${4 - trx.length} more to TrakList`}</Text>
+          <VHeader
+            type="five"
+            color={'#fff'}
+            text={`${4 - trx.length} more to TrakList`}
+          />
         </View>
       )}
     </View>

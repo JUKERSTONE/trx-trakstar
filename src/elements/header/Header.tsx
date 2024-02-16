@@ -58,6 +58,7 @@ export const HeaderElement = ({
   hasChat,
   handleAdmin,
   handleNavigateConnect,
+  isOffline,
 }: any) => {
   const player = useSelector((state: any) => state.player);
   const profile = useSelector((state: any) => state.profile);
@@ -412,9 +413,11 @@ export const HeaderElement = ({
                       />
                     </View>
                   </View>
-                ) : (
+                ) : isOffline ? (
                   <View>
-                    {3 - profile.trakland.trx?.length > -1 ? (
+                    {profile.trakland.trx?.length == null ? null : 3 -
+                        profile.trakland.trx?.length >
+                      -1 ? (
                       <Text style={{color: '#fff', fontSize: 12}}>
                         {4 - profile.trakland.trx.length}
                       </Text>
@@ -422,6 +425,8 @@ export const HeaderElement = ({
                       <Button title="GO" onPress={handleNavigateConnect} />
                     )}
                   </View>
+                ) : (
+                  <View style={{height: 35}} />
                 )}
               </View>
             </View>

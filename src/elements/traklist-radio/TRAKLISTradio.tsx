@@ -170,9 +170,9 @@ export const TRAKLISTradioElement = (...props) => {
         playerTitle: title,
         playerArtist: artist,
         merchandiseImage: product.content.product?.variants[0].imageUrls[0],
-        merchandiseTitle: product.content.product?.brand,
-        merchandisePromotion: product.content.product?.promo,
-        merchandisePrice: `${product.content.product?.variants[0].currency} ${product.content.product?.variants[0].amount}`,
+        merchandiseTitle: 'Welcome to TRX Live - Industry 2.0',
+        merchandisePromotion: 'Listen free, buy convieniently.',
+        merchandisePrice: `FREE`,
         isPlaying: false,
         auctionId: 'efe',
       },
@@ -223,7 +223,7 @@ export const TRAKLISTradioElement = (...props) => {
     // );
 
     // publish to apn server
-  }, [title, image.uri, artist]);
+  }, []);
 
   useEffect(() => {
     console.log('🚀 ~ :TRX.likes?.some ~ TRX.likes:', youtubeId, TRX);
