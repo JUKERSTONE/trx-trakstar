@@ -141,6 +141,7 @@ export const playerSlice = createSlice({
     appendTraklist: (state: any, action) => {
       const {traklist, radio} = action.payload;
       state.traklist = [...state.traklist, ...traklist];
+      console.log('🚀 ~ traklist:', traklist);
 
       if (radio) {
         state.radio = radio;

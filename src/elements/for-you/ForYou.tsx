@@ -27,10 +27,6 @@ export const ForYouElement = ({
   ...props
 }: any) => {
   // TRA
-  console.log('🚀 ~ file: TRAKTab.tsx ~ line 24 ~ modal', modal);
-  console.log('🚀 ~ file: TRAKTab.tsx ~ line 24 ~ results', results);
-  console.log('🚀 ~ file: TRAKTab.tsx ~ line 23 ~ metaTRAK', metaTRAK);
-  console.log('🚀 ~ file: TRAKTab.tsx ~ line 14 ~ TRAKTabElement ~ trak', trak);
 
   const hasTRX = true;
 
@@ -124,10 +120,6 @@ export const ForYouElement = ({
           </>
         )}
         renderItem={({item, index}) => {
-          console.log(
-            '🚀 ~ file: TRAKTab.tsx ~ line 37 ~ TRAKTabElement ~ item',
-            item,
-          );
           const result = item.result;
 
           const serialized_trak = item?.serialized_trak;
@@ -137,13 +129,11 @@ export const ForYouElement = ({
           // );
 
           const trak = serialized_trak ? JSON.parse(serialized_trak) : null;
-          console.log('🚀 ~ file: TRAKTab.tsx ~ line 185 ~ trak', trak);
 
           switch (item.type) {
             case null:
               return <View />;
             case 'TRK':
-              console.log('🚀 ~ file: TRAKTab.tsx ~ line 169 ~ item', item);
               return (
                 <TouchableOpacity onPress={() => handleTRAK(item?.result)}>
                   <View style={{flex: 3, flexDirection: 'column'}}>
@@ -161,12 +151,7 @@ export const ForYouElement = ({
               );
             default:
               if (!trak) return null;
-              console.log('🚀 ~ file: ForYou.tsx:170 ~ hasLiked ~ trak:', trak);
               const hasLiked = trak?.TRAK?.Likes?.some((item: any) => {
-                console.log(
-                  '🚀 ~ file: TRAK.tsx ~ line 78 ~ test ~ item',
-                  item,
-                );
                 return item.id == TRXProfile.trak_name;
               });
               return (
@@ -285,10 +270,6 @@ export const ForYouElement = ({
               </>
             )}
             renderItem={({item, index}) => {
-              console.log(
-                '🚀 ~ file: TRAKTab.tsx ~ line 37 ~ TRAKTabElement ~ item',
-                item,
-              );
               const result = item.result;
 
               const serialized_trak = item?.serialized_trak;
@@ -298,13 +279,11 @@ export const ForYouElement = ({
               // );
 
               const trak = serialized_trak ? JSON.parse(serialized_trak) : null;
-              console.log('🚀 ~ file: TRAKTab.tsx ~ line 185 ~ trak', trak);
 
               switch (item.type) {
                 case null:
                   return <View />;
                 case 'TRK':
-                  console.log('🚀 ~ file: TRAKTab.tsx ~ line 169 ~ item', item);
                   return (
                     <TouchableOpacity onPress={() => handleTRAK(item?.result)}>
                       <View style={{flex: 3, flexDirection: 'column'}}>
@@ -322,10 +301,6 @@ export const ForYouElement = ({
                   );
                 default:
                   const hasLiked = trak.TRAK.likes.some((item: any) => {
-                    console.log(
-                      '🚀 ~ file: TRAK.tsx ~ line 78 ~ test ~ item',
-                      item,
-                    );
                     return item.id == TRXProfile.trak_name;
                   });
                   return (
@@ -450,13 +425,11 @@ export const ForYouElement = ({
           // );
 
           const trak = serialized_trak ? JSON.parse(serialized_trak) : null;
-          console.log('🚀 ~ file: TRAKTab.tsx ~ line 185 ~ trak', trak);
 
           switch (item.type) {
             case null:
               return <View />;
             case 'TRK':
-              console.log('🚀 ~ file: TRAKTab.tsx ~ line 169 ~ item', item);
               return (
                 <TouchableOpacity onPress={() => handleTRAK(item?.result)}>
                   <View style={{flex: 3, flexDirection: 'column'}}>
@@ -474,10 +447,6 @@ export const ForYouElement = ({
               );
             default:
               const hasLiked = trak.TRAK.likes.some((item: any) => {
-                console.log(
-                  '🚀 ~ file: TRAK.tsx ~ line 78 ~ test ~ item',
-                  item,
-                );
                 return item.id == TRXProfile.trak_name;
               });
               return (

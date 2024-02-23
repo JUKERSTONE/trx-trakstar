@@ -89,11 +89,6 @@ export const ChatElement = ({
           data={sortedMessages}
           style={{height: '100%'}}
           renderItem={({item, index}) => {
-            console.log(
-              '🚀 ~ file: TRAKTab.tsx ~ line 37 ~ TRAKTabElement ~ item',
-              item,
-            );
-
             const player = JSON.parse(item.player);
             console.log('🚀 ~ file: Chat.tsx ~ line 97 ~ player', player);
 

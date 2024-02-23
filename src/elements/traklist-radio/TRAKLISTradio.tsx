@@ -11,6 +11,7 @@ import {
   Image,
   Pressable,
   Platform,
+  ActivityIndicator,
 } from 'react-native';
 import MediaPlayer from 'react-native-video';
 import {
@@ -36,6 +37,7 @@ import {
   appendTraklist,
   useAsyncStorage,
   asyncStorageIndex,
+  setTraklist,
 } from '../../stores';
 import Toast from 'react-native-toast-message';
 import YoutubePlayer from 'react-native-youtube-iframe';
@@ -128,6 +130,7 @@ export const TRAKLISTradioElement = (...props) => {
   //   player,
   // );
   const [miniYoutube, setMiniYoutube] = useState(youtubeMinimize);
+  const [loadingRadio, setLoadingRadio] = useState(false);
 
   const handleAppStateChange = (nextAppState: any) => {
     if (nextAppState === 'active') {
@@ -455,7 +458,7 @@ export const TRAKLISTradioElement = (...props) => {
           }}>
           <View
             style={{
-              height: 70,
+              height: 170,
               width: '100%',
               backgroundColor: '#fff',
               alignItems: 'center',
@@ -514,6 +517,105 @@ export const TRAKLISTradioElement = (...props) => {
                   if (youtubeId) {
                     // if next branch doesn't exist, create it
                     if (traklistIndex === traklist.length - 1) {
+                      if (!radio.default) {
+                        if (traklist && traklistIndex === traklist.length - 1) {
+                          setLoadingRadio(true);
+                          Toast.show({
+                            type: 'info',
+                            text1: 'Generating TRX Radio results',
+                            text2: 'Finding new music...',
+                          });
+                          const route = api.bernie({method: 'trx-radio'});
+                          console.log(
+                            '🚀 ~ file: radio.ts:39 ~ handleGetTRXRadio ~ route:',
+                            route,
+                          );
+
+                          const {handleGetState} = useLITELISTState();
+                          const keys = handleGetState({index: 'keys'});
+                          const accessToken = keys.trx.accessToken;
+
+                          const response = await usePOST({
+                            route,
+                            token: accessToken,
+                            payload: {
+                              radioId: profile.TRX?.radioId,
+                            },
+                          })
+                            .then(async (res: any) => {
+                              console.log('🚀 ~ .then ~ res:', res);
+
+                              if (res.data.isExhausted) return;
+
+                              const trx = res.data.radio.root;
+                              const traklist = res.data.traklist;
+
+                              const playerService = traklist.map(
+                                (item: any) => {
+                                  const trak = JSON.parse(
+                                    item.serialized_trak,
+                                  ).TRAK;
+                                  console.log(
+                                    '🚀 ~ file: radio.ts:27 ~ trx ~ trak:',
+                                    trak,
+                                  );
+                                  return {
+                                    player: {
+                                      title: trak.trak.title,
+                                      artist: trak.trak.artist,
+                                      cover_art: trak.trak.thumbnail,
+                                      geniusId: trak.trak.genius.id,
+                                    },
+                                    service: {
+                                      provider: 'youtube',
+                                      url: trak.trak.youtube.url,
+                                    },
+                                    id: item.id,
+                                  };
+                                },
+                              );
+                              console.log(
+                                '🚀 ~ file: radio.ts:33 ~ trx ~ trx:',
+                                trx,
+                              );
+                              const action1 = handleMediaPlayerAction({
+                                playbackState: 'pause:force',
+                              });
+
+                              store.dispatch(action1);
+                              const action = setTraklist({
+                                traklist: playerService,
+                                activeIndex: 0,
+                                radio: trx,
+                              });
+
+                              store.dispatch(action);
+
+                              await handleStore({
+                                key: asyncStorageIndex.radio,
+                                value: {
+                                  trx,
+                                  traklist: playerService,
+                                  index: 0,
+                                },
+                              });
+                            })
+                            .catch(err => {
+                              console.log(
+                                '🚀 ~ file: radio.ts:41 ~ handleGetTRXRadio ~ err:',
+                                err,
+                              );
+                            });
+
+                          setLoadingRadio(false);
+
+                          console.log(
+                            '🚀 ~ file: radio.ts:41 ~ handleGetTRXRadio ~ err:',
+                            response,
+                          );
+                        }
+                      }
+
                       if (radio.default) {
                         const traklist = await Promise.all(
                           radio.default.value.map(async (isrc: string) => {
@@ -543,6 +645,10 @@ export const TRAKLISTradioElement = (...props) => {
                             id: item.id,
                           };
                         });
+                        console.log(
+                          '🚀 ~ playerService ~ playerService:',
+                          playerService,
+                        );
 
                         const action1 = handleMediaPlayerAction({
                           playbackState: 'pause:force',
@@ -583,11 +689,15 @@ export const TRAKLISTradioElement = (...props) => {
                   }
                 }}>
                 <View style={{alignItems: 'center', marginRight: 10}}>
-                  <MaterialCommunityIcons
-                    name={'fast-forward'}
-                    size={25}
-                    color="#1db954"
-                  />
+                  {!loadingRadio ? (
+                    <MaterialCommunityIcons
+                      name={'fast-forward'}
+                      size={25}
+                      color="#1db954"
+                    />
+                  ) : (
+                    <ActivityIndicator size="small" color="#1db954" />
+                  )}
                 </View>
               </Pressable>
 

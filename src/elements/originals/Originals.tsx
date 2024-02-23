@@ -46,11 +46,6 @@ export const OriginalsElement = ({
         scrollEnabled={false}
         data={originals}
         renderItem={({item, index}) => {
-          console.log(
-            '🚀 ~ file: TRAKTab.tsx ~ line 37 ~ TRAKTabElement ~ item',
-            item,
-          );
-
           return (
             <TouchableOpacity
               onPress={() =>

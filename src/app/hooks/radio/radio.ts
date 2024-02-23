@@ -11,9 +11,11 @@ import {
 } from '../../../stores';
 
 export const handleGetTRXRadio = async () => {
-  const {useGET} = useAPI();
+  const {useGET, usePOST} = useAPI();
   const {handleGetState} = useLITELISTState();
   const keys = handleGetState({index: 'keys'});
+  const profile = handleGetState({index: 'profile'});
+  console.log('🚀 ~ handleGetTRXRadio ~ profile:', profile);
 
   const {handleGet, handleStore} = useAsyncStorage();
 
@@ -62,15 +64,21 @@ export const handleGetTRXRadio = async () => {
 
   const route = api.bernie({method: 'trx-radio'});
   console.log('🚀 ~ file: radio.ts:39 ~ handleGetTRXRadio ~ route:', route);
-  const response = await useGET({route, token: keys.trx.accessToken}).catch(
-    err => {
-      console.log('🚀 ~ file: radio.ts:41 ~ handleGetTRXRadio ~ err:', err);
+  const response = await usePOST({
+    route,
+    token: keys.trx.accessToken,
+    payload: {
+      radioId: profile.TRX.radioId,
     },
-  );
+  }).catch(err => {
+    console.log('🚀 ~ file: radio.ts:41 ~ handleGetTRXRadio ~ err:', err);
+  });
   console.log(
     '🚀 ~ file: radio.ts:15 ~ handleGetTRXRadio ~ response:',
     response,
   );
+
+  if (response.data.isExhausted) return;
 
   const trx = response.data.radio.root;
   const traklist = response.data.traklist;
