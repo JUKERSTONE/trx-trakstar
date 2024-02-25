@@ -32,7 +32,7 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {store, setFeed, setChatPlayer, setSwipePlayer} from '../../stores';
 import {useLITELISTState} from '../../app';
 import {useFocusEffect} from '@react-navigation/native';
-import {useOrderLiveActivity} from '../../app/hooks/live-activity/useLiveActivity';
+import {TRXScreen} from '../../screens/TRXScreen';
 
 export const HomeElement = ({...props}) => {
   const layout = useWindowDimensions();
@@ -49,18 +49,6 @@ export const HomeElement = ({...props}) => {
     {key: 'third', title: 'my-library-music'},
     // {key: 'fourth', title: 'youtube-searched-for'},
   ]);
-
-  const onStartActivity = () => {
-    // NativeModules.TRXLive.request('liveActivityId', {
-    //   status: 'Created',
-    //   statusMessage: 'ssing',
-    //   etaLabel: 'OrderStatus',
-    //   etaLong: 'ee',
-    //   etaShort: 'e',
-    //   orderId: '', // The order ID will be provided later by APNS push updates.
-    // });
-    // NativeModules.TRXLiveModule.startActivity();
-  };
 
   useFocusEffect(
     React.useCallback(() => {
@@ -96,7 +84,7 @@ export const HomeElement = ({...props}) => {
           case 'second':
             return <FeedContainer {...props} />;
           case 'third':
-            return <ForYouContainer query={''} {...props} />;
+            return <TRXScreen {...props} />;
           // case 'fourth':
           //   return <USERSTabContainer query="eee" {...props} />;
           default:

@@ -81,10 +81,16 @@ export const useForYou = (props: any) => {
       trxUri: 'trx:00:' + result.isrc,
     });
     store.dispatch(action);
-    handlePlayTRX({
+    // handlePlayTRX({
+    //   navigation: props.navigation,
+    //   geniusId: result.TRAK.trak.genius.id.replace(/["\\]/g, ''),
+    //   spotifyAccessToken: appToken,
+    // });
+
+    await handlePlayTRX({
       navigation: props.navigation,
-      geniusId: result.TRAK.trak.genius.id.replace(/["\\]/g, ''),
-      spotifyAccessToken: appToken,
+      trx: trak,
+      spotifyAccessToken: keys.spotify.accessToken,
     });
   };
   return {
