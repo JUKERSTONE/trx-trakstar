@@ -10,6 +10,9 @@ target 'LiteList' do
   # Flags change depending on the env values.
   flags = get_default_flags()
 
+  use_frameworks! :linkage => :static
+  $RNFirebaseAsStaticFramework = true
+  
   use_react_native!(
     :path => config[:reactNativePath],
     # to enable hermes on iOS, change `false` to `true` and then install pods
@@ -27,6 +30,18 @@ target 'LiteList' do
 
   pod 'RNSpotifyRemote', :path => '../node_modules/react-native-spotify-remote'
 
+  pod 'FirebaseFirestoreInternal', :modular_headers => true
+  pod 'FirebaseAppCheckInterop', :modular_headers => true
+  pod 'FirebaseInstallations', :modular_headers => true
+  pod 'FirebaseCoreExtension', :modular_headers => true
+  pod 'FirebaseAuthInterop', :modular_headers => true
+  pod 'GoogleDataTransport', :modular_headers => true
+  pod 'GoogleUtilities', :modular_headers => true
+  pod 'FirebaseCore', :modular_headers => true
+  pod 'nanopb', :modular_headers => true
+
+  
+
   target 'LiteListTests' do
     inherit! :complete
     # Pods for testing
@@ -36,7 +51,7 @@ target 'LiteList' do
   #
   # Note that if you have use_frameworks! enabled, Flipper will not work and
   # you should disable the next line.
-  use_flipper!()
+  # use_flipper!()
 
   post_install do |installer|
     react_native_post_install(installer)
