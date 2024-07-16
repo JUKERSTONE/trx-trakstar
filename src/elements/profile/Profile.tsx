@@ -146,221 +146,222 @@ export const ProfileElement = ({
             <ParallaxScrollView
               backgroundColor="transparent"
               contentBackgroundColor={'transparent'}
-              parallaxHeaderHeight={120}
-              stickyHeaderHeight={100}
-              renderForeground={() => (
-                <View
-                  style={{
-                    flexDirection: 'row',
-                    backgroundColor: '#1a1a1a',
-                    borderTopLeftRadius: 15,
-                    borderTopRightRadius: 15,
-                    height: '100%',
-                    margin: 10,
-                    borderWidth: 2,
-                    borderColor: '#333333',
-                  }}>
-                  <Image
-                    source={{uri: profileObj.avatarURL}}
-                    style={{
-                      backgroundColor: '#1B4F26',
-                      height: '100%',
-                      width: 170,
-                      alignSelf: 'center',
-                      borderRadius: 7,
-                      borderWidth: 2,
-                      borderColor: '#232323',
-                    }}
-                  />
-                  <View
-                    style={{
-                      paddingVertical: 15,
-                      justifyContent: 'center',
-                      flex: 1,
-                      paddingTop: 30,
-                      marginLeft: 15,
-                    }}>
-                    <View style={{flexDirection: 'row'}}>
-                      <View style={{flexDirection: 'row', marginRight: 8}}>
-                        <View style={{justifyContent: 'center'}}>
-                          {/* <Body
-                        // numberOfLines={1}
-                        type="two"
-                        color={'#1a1a1a'}
-                        text={item.userCategory + ' user'}
-                      /> */}
-                          {profileObj.userCategory === 'spotify' && (
-                            <Fontisto
-                              name="spotify"
-                              size={18}
-                              color={'#cecece'}
-                            />
-                          )}
-                          {profileObj.userCategory === 'primary' && (
-                            <View style={{flexDirection: 'row'}}>
-                              <View style={{marginRight: 5}}>
-                                <Fontisto
-                                  name="spotify"
-                                  size={18}
-                                  color={'#cecece'}
-                                />
-                              </View>
-                              <Fontisto
-                                name="applemusic"
-                                size={18}
-                                color={'#cecece'}
-                              />
-                            </View>
-                          )}
-                          {profileObj.userCategory === 'apple_music' && (
-                            <Fontisto
-                              name="applemusic"
-                              size={18}
-                              color={'#cecece'}
-                            />
-                          )}
-                        </View>
-                      </View>
-                      <View
-                        style={{
-                          flexDirection: 'row',
-                          alignItems: 'center',
-                        }}>
-                        <VHeader
-                          numberOfLines={1}
-                          type="six"
-                          color={'#cecece'}
-                          text={profileObj.trak_name}
-                        />
-                        <Caption
-                          numberOfLines={1}
-                          type="two"
-                          color={'#663355'}
-                          text={'  [' + profileObj.trak_symbol + ']'}
-                        />
-                        <View style={{flexDirection: 'row', marginLeft: 3}}>
-                          <Ionicons
-                            name="ios-flame-sharp"
-                            size={15}
-                            color={'orange'}
-                          />
-                          <Text
-                            style={{
-                              fontSize: 8,
-                              fontWeight: 'bold',
-                              color: '#cecece',
-                            }}>
-                            {profileObj.streak}
-                          </Text>
-                        </View>
-                      </View>
-                    </View>
+              parallaxHeaderHeight={0}
+              stickyHeaderHeight={0}
+              // renderForeground={() => (
+              //   <View
+              //     style={{
+              //       flexDirection: 'row',
+              //       backgroundColor: '#1a1a1a',
+              //       borderTopLeftRadius: 15,
+              //       borderTopRightRadius: 15,
+              //       height: '100%',
+              //       margin: 10,
+              //       borderWidth: 2,
+              //       borderColor: '#333333',
+              //     }}>
+              //     <Image
+              //       source={{uri: profileObj.avatarURL}}
+              //       style={{
+              //         backgroundColor: '#1B4F26',
+              //         height: '100%',
+              //         width: 170,
+              //         alignSelf: 'center',
+              //         borderRadius: 7,
+              //         borderWidth: 2,
+              //         borderColor: '#232323',
+              //       }}
+              //     />
+              //     <View
+              //       style={{
+              //         paddingVertical: 15,
+              //         justifyContent: 'center',
+              //         flex: 1,
+              //         paddingTop: 30,
+              //         marginLeft: 15,
+              //       }}>
+              //       <View style={{flexDirection: 'row'}}>
+              //         <View style={{flexDirection: 'row', marginRight: 8}}>
+              //           <View style={{justifyContent: 'center'}}>
+              //             {/* <Body
+              //           // numberOfLines={1}
+              //           type="two"
+              //           color={'#1a1a1a'}
+              //           text={item.userCategory + ' user'}
+              //         /> */}
+              //             {profileObj.userCategory === 'spotify' && (
+              //               <Fontisto
+              //                 name="spotify"
+              //                 size={18}
+              //                 color={'#cecece'}
+              //               />
+              //             )}
+              //             {profileObj.userCategory === 'primary' && (
+              //               <View style={{flexDirection: 'row'}}>
+              //                 <View style={{marginRight: 5}}>
+              //                   <Fontisto
+              //                     name="spotify"
+              //                     size={18}
+              //                     color={'#cecece'}
+              //                   />
+              //                 </View>
+              //                 <Fontisto
+              //                   name="applemusic"
+              //                   size={18}
+              //                   color={'#cecece'}
+              //                 />
+              //               </View>
+              //             )}
+              //             {profileObj.userCategory === 'apple_music' && (
+              //               <Fontisto
+              //                 name="applemusic"
+              //                 size={18}
+              //                 color={'#cecece'}
+              //               />
+              //             )}
+              //           </View>
+              //         </View>
+              //         <View
+              //           style={{
+              //             flexDirection: 'row',
+              //             alignItems: 'center',
+              //           }}>
+              //           <VHeader
+              //             numberOfLines={1}
+              //             type="six"
+              //             color={'#cecece'}
+              //             text={profileObj.trak_name}
+              //           />
+              //           <Caption
+              //             numberOfLines={1}
+              //             type="two"
+              //             color={'#663355'}
+              //             text={'  [' + profileObj.trak_symbol + ']'}
+              //           />
+              //           <View style={{flexDirection: 'row', marginLeft: 3}}>
+              //             <Ionicons
+              //               name="ios-flame-sharp"
+              //               size={15}
+              //               color={'orange'}
+              //             />
+              //             <Text
+              //               style={{
+              //                 fontSize: 8,
+              //                 fontWeight: 'bold',
+              //                 color: '#cecece',
+              //               }}>
+              //               {profileObj.streak}
+              //             </Text>
+              //           </View>
+              //         </View>
+              //       </View>
 
-                    <View
-                      style={{
-                        flexDirection: 'row',
-                        marginTop: 2,
-                        paddingRight: 10,
-                        width: '100%',
-                        // backgroundColor: 'red',
-                        justifyContent: 'space-between',
-                      }}>
-                      {/* <TouchableOpacity onPress={handleShareProfile}>
-                        <View
-                          style={{
-                            backgroundColor: '#232323',
-                            // borderWidth: 3,
-                            borderColor: 'grey',
-                            alignSelf: 'flex-start',
-                            paddingHorizontal: 10,
-                            paddingVertical: 3,
-                            borderRadius: 5,
-                            marginTop: 10,
-                            flexDirection: 'row',
-                          }}>
-                          <MaterialIcons
-                            name={'share'}
-                            size={20}
-                            color={'#ffff'}
-                            style={{marginRight: 10}}
-                          />
-                          <VHeader
-                            // numberOfLines={1}
-                            type="five"
-                            color={'#fff'}
-                            text={'SHARE'}
-                          />
-                        </View>
-                      </TouchableOpacity> */}
-                      {!isOwner ? (
-                        <TouchableOpacity onPress={handleToggleFollowUser}>
-                          <View
-                            style={{
-                              backgroundColor: '#232323',
-                              // borderWidth: 3,
-                              borderColor: 'grey',
-                              alignSelf: 'flex-start',
-                              paddingHorizontal: 10,
-                              paddingVertical: 3,
-                              borderRadius: 5,
-                              marginTop: 10,
-                            }}>
-                            <VHeader
-                              // numberOfLines={1}
-                              type="five"
-                              color={'#fff'}
-                              text={'FOLLOW'}
-                            />
-                          </View>
-                        </TouchableOpacity>
-                      ) : (
-                        <TouchableOpacity
-                          onPress={handleToggleProfileVisibility}>
-                          <View
-                            style={{
-                              backgroundColor: '#232323',
-                              // borderWidth: 3,
-                              borderColor: 'grey',
-                              alignSelf: 'flex-start',
-                              paddingHorizontal: 15,
-                              paddingVertical: 5.5,
-                              borderRadius: 5,
-                              marginTop: 10,
-                              flexDirection: 'row',
-                            }}>
-                            <View
-                              style={{
-                                marginRight: 5,
-                                // backgroundColor: 'white',
-                                justifyContent: 'center',
-                                borderRadius: 10,
-                                padding: 0,
-                              }}>
-                              <VHeader
-                                // numberOfLines={1}
-                                type="six"
-                                color={'#ffff'}
-                                text={isPrivate ? 'GO PUBLIC' : 'GO PRIVATE'}
-                              />
-                            </View>
-                            <MaterialIcons
-                              name={
-                                !isOwner
-                                  ? 'follow-the-signs'
-                                  : isPrivate
-                                  ? 'public'
-                                  : 'public-off'
-                              }
-                              size={20}
-                              color={'#ffff'}
-                            />
-                          </View>
-                        </TouchableOpacity>
-                      )}
-                    </View>
-                  </View>
-                </View>
-              )}>
+              //       <View
+              //         style={{
+              //           flexDirection: 'row',
+              //           marginTop: 2,
+              //           paddingRight: 10,
+              //           width: '100%',
+              //           // backgroundColor: 'red',
+              //           justifyContent: 'space-between',
+              //         }}>
+              //         {/* <TouchableOpacity onPress={handleShareProfile}>
+              //           <View
+              //             style={{
+              //               backgroundColor: '#232323',
+              //               // borderWidth: 3,
+              //               borderColor: 'grey',
+              //               alignSelf: 'flex-start',
+              //               paddingHorizontal: 10,
+              //               paddingVertical: 3,
+              //               borderRadius: 5,
+              //               marginTop: 10,
+              //               flexDirection: 'row',
+              //             }}>
+              //             <MaterialIcons
+              //               name={'share'}
+              //               size={20}
+              //               color={'#ffff'}
+              //               style={{marginRight: 10}}
+              //             />
+              //             <VHeader
+              //               // numberOfLines={1}
+              //               type="five"
+              //               color={'#fff'}
+              //               text={'SHARE'}
+              //             />
+              //           </View>
+              //         </TouchableOpacity> */}
+              //         {!isOwner ? (
+              //           <TouchableOpacity onPress={handleToggleFollowUser}>
+              //             <View
+              //               style={{
+              //                 backgroundColor: '#232323',
+              //                 // borderWidth: 3,
+              //                 borderColor: 'grey',
+              //                 alignSelf: 'flex-start',
+              //                 paddingHorizontal: 10,
+              //                 paddingVertical: 3,
+              //                 borderRadius: 5,
+              //                 marginTop: 10,
+              //               }}>
+              //               <VHeader
+              //                 // numberOfLines={1}
+              //                 type="five"
+              //                 color={'#fff'}
+              //                 text={'FOLLOW'}
+              //               />
+              //             </View>
+              //           </TouchableOpacity>
+              //         ) : (
+              //           <TouchableOpacity
+              //             onPress={handleToggleProfileVisibility}>
+              //             <View
+              //               style={{
+              //                 backgroundColor: '#232323',
+              //                 // borderWidth: 3,
+              //                 borderColor: 'grey',
+              //                 alignSelf: 'flex-start',
+              //                 paddingHorizontal: 15,
+              //                 paddingVertical: 5.5,
+              //                 borderRadius: 5,
+              //                 marginTop: 10,
+              //                 flexDirection: 'row',
+              //               }}>
+              //               <View
+              //                 style={{
+              //                   marginRight: 5,
+              //                   // backgroundColor: 'white',
+              //                   justifyContent: 'center',
+              //                   borderRadius: 10,
+              //                   padding: 0,
+              //                 }}>
+              //                 <VHeader
+              //                   // numberOfLines={1}
+              //                   type="six"
+              //                   color={'#ffff'}
+              //                   text={isPrivate ? 'GO PUBLIC' : 'GO PRIVATE'}
+              //                 />
+              //               </View>
+              //               <MaterialIcons
+              //                 name={
+              //                   !isOwner
+              //                     ? 'follow-the-signs'
+              //                     : isPrivate
+              //                     ? 'public'
+              //                     : 'public-off'
+              //                 }
+              //                 size={20}
+              //                 color={'#ffff'}
+              //               />
+              //             </View>
+              //           </TouchableOpacity>
+              //         )}
+              //       </View>
+              //     </View>
+              //   </View>
+              // )}
+            >
               <View style={{height: Dimensions.get('screen').height * 10}}>
                 <TabView
                   navigationState={{index, routes}}

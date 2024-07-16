@@ -62,83 +62,19 @@ export const useTRXPictureInPicture = ({isTraklist, ...props}: any) => {
   }, [appState]);
 
   useEffect(() => {
-    if (!songEnded) {
-      setPlayerInitialized(false);
-      if (isPrimaryPlayer) {
-        setTRXUrl1(
-          `https://www.youtube.com/watch?v=${
-            player.youtubeId?.split('=')[1]
-          }?playsinline=1&fs=0`,
-        );
-
-        setTimeout(() => {
-          userData.PiP1Ref.current?.injectJavaScript(`
-      if (!window.trakStarVideo) {
-        window.trakStarVideo = document.getElementsByTagName('video')[0];
-      }
-      
-      if (window.trakStarVideo) {
-        window.trakStarVideo.requestPictureInPicture().then(() => {
-          const message = {
-            eventType: 'enablePiP',
-            data: 'PiP initiated successfully.'
-          };
-          window.ReactNativeWebView.postMessage(JSON.stringify(message));
-        }).catch(error => {
-          const message = {
-            eventType: 'enablePiP',
-            data: 'PiP initiation failed: ' + error.message
-          };
-          window.ReactNativeWebView.postMessage(JSON.stringify(message));
-        });
-      } else {
-        const message = {
-          eventType: 'enablePiP',
-          data: 'No video element found.'
-        };
-        window.ReactNativeWebView.postMessage(JSON.stringify(message));
-      }
-      true;  
-    `);
-        }, 1000);
-      } else {
-        setTRXUrl2(
-          `https://www.youtube.com/watch?v=${
-            player.youtubeId?.split('=')[1]
-          }?playsinline=1&fs=0`,
-        );
-
-        setTimeout(() => {
-          userData.PiP2Ref.current?.injectJavaScript(`
-      if (!window.trakStarVideo) {
-        window.trakStarVideo = document.getElementsByTagName('video')[0];
-      }
-      
-      if (window.trakStarVideo) {
-        window.trakStarVideo.requestPictureInPicture().then(() => {
-          const message = {
-            eventType: 'enablePiP',
-            data: 'PiP initiated successfully.'
-          };
-          window.ReactNativeWebView.postMessage(JSON.stringify(message));
-        }).catch(error => {
-          const message = {
-            eventType: 'enablePiP',
-            data: 'PiP initiation failed: ' + error.message
-          };
-          window.ReactNativeWebView.postMessage(JSON.stringify(message));
-        });
-      } else {
-        const message = {
-          eventType: 'enablePiP',
-          data: 'No video element found.'
-        };
-        window.ReactNativeWebView.postMessage(JSON.stringify(message));
-      }
-      true;  
-    `);
-        }, 1000);
-      }
+    setPlayerInitialized(false);
+    if (isPrimaryPlayer) {
+      setTRXUrl1(
+        `https://www.youtube.com/watch?v=${
+          player.youtubeId?.split('=')[1]
+        }?playsinline=1&fs=0`,
+      );
+    } else {
+      setTRXUrl2(
+        `https://www.youtube.com/watch?v=${
+          player.youtubeId?.split('=')[1]
+        }?playsinline=1&fs=0`,
+      );
     }
   }, [player.youtubeId]);
 
@@ -152,71 +88,11 @@ export const useTRXPictureInPicture = ({isTraklist, ...props}: any) => {
       console.log(
         '🚀 ~ file: useTRXPictureInPicture.ts:219 ~ useEffect ~ primary:',
       );
-      setTimeout(() => {
-        userData.PiP1Ref.current?.injectJavaScript(`
-    if (!window.trakStarVideo) {
-      window.trakStarVideo = document.getElementsByTagName('video')[0];
-    }
-    
-    if (window.trakStarVideo) {
-      window.trakStarVideo.requestPictureInPicture().then(() => {
-        const message = {
-          eventType: 'enablePiP',
-          data: 'PiP initiated successfully.'
-        };
-        window.ReactNativeWebView.postMessage(JSON.stringify(message));
-      }).catch(error => {
-        const message = {
-          eventType: 'enablePiP',
-          data: 'PiP initiation failed: ' + error.message
-        };
-        window.ReactNativeWebView.postMessage(JSON.stringify(message));
-      });
-    } else {
-      const message = {
-        eventType: 'enablePiP',
-        data: 'No video element found.'
-      };
-      window.ReactNativeWebView.postMessage(JSON.stringify(message));
-    }
-    true;  
-  `);
-      }, 500);
     } else if (!isPrimaryPlayer && appState === 'active') {
       console.log(
         '🚀 ~ file: useTRXPictureInPicture.ts:251 ~ useEffect ~ secondary:',
         isPrimaryPlayer,
       );
-      setTimeout(() => {
-        userData.PiP2Ref.current?.injectJavaScript(`
-    if (!window.trakStarVideo) {
-      window.trakStarVideo = document.getElementsByTagName('video')[0];
-    }
-    
-    if (window.trakStarVideo) {
-      window.trakStarVideo.requestPictureInPicture().then(() => {
-        const message = {
-          eventType: 'enablePiP',
-          data: 'PiP initiated successfully.'
-        };
-        window.ReactNativeWebView.postMessage(JSON.stringify(message));
-      }).catch(error => {
-        const message = {
-          eventType: 'enablePiP',
-          data: 'PiP initiation failed: ' + error.message
-        };
-        window.ReactNativeWebView.postMessage(JSON.stringify(message));
-      });
-    } else {
-      const message = {
-        eventType: 'enablePiP',
-        data: 'No video element found.'
-      };
-      window.ReactNativeWebView.postMessage(JSON.stringify(message));
-    }
-    true;  
-  `);
-      }, 500);
     }
   }, [
     isPrimaryWebViewLoaded,
@@ -286,7 +162,7 @@ export const useTRXPictureInPicture = ({isTraklist, ...props}: any) => {
   const fetchVideoTimeJS = (active: boolean) => `
   if (!window.trakStarVideo) {
     window.trakStarVideo = document.getElementsByTagName('video')[0];
-    window.trakStarVideo.addEventListener('loadedmetadata', () => {
+    window.trakStarVideo.addEventListener('canplay', () => {
       window.ReactNativeWebView.postMessage(JSON.stringify({
           eventType: 'videoReady',
           data: true
@@ -322,6 +198,70 @@ export const useTRXPictureInPicture = ({isTraklist, ...props}: any) => {
     switch (message.eventType) {
       case 'videoReady':
         setPlayerInitialized(true);
+
+        if (isPrimaryPlayer) {
+          setTimeout(() => {
+            userData.PiP1Ref.current?.injectJavaScript(`
+        if (!window.trakStarVideo) {
+          window.trakStarVideo = document.getElementsByTagName('video')[0];
+        }
+        
+        if (window.trakStarVideo) {
+          window.trakStarVideo.requestPictureInPicture().then(() => {
+            const message = {
+              eventType: 'enablePiP',
+              data: 'PiP initiated successfully.'
+            };
+            window.ReactNativeWebView.postMessage(JSON.stringify(message));
+          }).catch(error => {
+            const message = {
+              eventType: 'enablePiP',
+              data: 'PiP initiation failed: ' + error.message
+            };
+            window.ReactNativeWebView.postMessage(JSON.stringify(message));
+          });
+        } else {
+          const message = {
+            eventType: 'enablePiP',
+            data: 'No video element found.'
+          };
+          window.ReactNativeWebView.postMessage(JSON.stringify(message));
+        }
+        true;  
+      `);
+          }, 500);
+        } else {
+          setTimeout(() => {
+            userData.PiP2Ref.current?.injectJavaScript(`
+        if (!window.trakStarVideo) {
+          window.trakStarVideo = document.getElementsByTagName('video')[0];
+        }
+        
+        if (window.trakStarVideo) {
+          window.trakStarVideo.requestPictureInPicture().then(() => {
+            const message = {
+              eventType: 'enablePiP',
+              data: 'PiP initiated successfully.'
+            };
+            window.ReactNativeWebView.postMessage(JSON.stringify(message));
+          }).catch(error => {
+            const message = {
+              eventType: 'enablePiP',
+              data: 'PiP initiation failed: ' + error.message
+            };
+            window.ReactNativeWebView.postMessage(JSON.stringify(message));
+          });
+        } else {
+          const message = {
+            eventType: 'enablePiP',
+            data: 'No video element found.'
+          };
+          window.ReactNativeWebView.postMessage(JSON.stringify(message));
+        }
+        true;  
+      `);
+          }, 500);
+        }
         break;
       case 'videoError':
         alert('video unavailable');
@@ -355,6 +295,7 @@ export const useTRXPictureInPicture = ({isTraklist, ...props}: any) => {
             artist: player.players.youtube.artist,
             cover_art: player.players.youtube.cover_art,
             geniusId: player.players.youtube.geniusId,
+            youtubeId: player.youtubeId,
           });
         }
 
@@ -459,25 +400,27 @@ export const useTRXPictureInPicture = ({isTraklist, ...props}: any) => {
               /* 
               if background
              */
+
+              const action1 = setPiPPlayer(false);
+              store.dispatch(action1);
             } else {
               const action = setYoutubeOff({});
               store.dispatch(action);
               setPlayerInitialized(false);
             }
-            const action = setPiPPlayer(false);
-            store.dispatch(action);
           } else if (!isPrimaryPlayer) {
             setSecondaryWebViewLoaded(false);
             if (isTraklist) {
               const action = setTraklistNext({});
               store.dispatch(action);
+
+              const action1 = setPiPPlayer(true);
+              store.dispatch(action1);
             } else {
               const action = setYoutubeOff({});
               store.dispatch(action);
               setPlayerInitialized(false);
             }
-            const action = setPiPPlayer(true);
-            store.dispatch(action);
           }
         }
 

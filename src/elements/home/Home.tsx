@@ -71,47 +71,5 @@ export const HomeElement = ({...props}) => {
       store.dispatch(action1);
     }
   }, [index]);
-  return (
-    <TabView
-      sceneContainerStyle={{overflow: 'visible'}}
-      swipeEnabled={false}
-      navigationState={{index, routes}}
-      style={{backgroundColor: '#1a1a1a', height: layout.height}}
-      renderScene={({route}) => {
-        switch (route.key) {
-          case 'first':
-            return <SwipeContainer {...props} />;
-          case 'second':
-            return <FeedContainer {...props} />;
-          case 'third':
-            return <TRXScreen {...props} />;
-          // case 'fourth':
-          //   return <USERSTabContainer query="eee" {...props} />;
-          default:
-            return <View />;
-        }
-      }}
-      onIndexChange={setIndex}
-      initialLayout={{width: layout.width}}
-      renderTabBar={props => (
-        <TabBar
-          {...props}
-          style={{
-            backgroundColor: '#232323',
-            margin: 10,
-            marginHorizontal: 20,
-            borderRadius: 10,
-          }}
-          renderLabel={({route, focused, color}) => (
-            <MaterialIcons
-              name={route.title}
-              color={focused ? '#fff' : 'grey'}
-              size={20}
-            />
-          )}
-          indicatorStyle={{backgroundColor: '#1db954'}}
-        />
-      )}
-    />
-  );
+  return <SwipeContainer {...props} />;
 };
